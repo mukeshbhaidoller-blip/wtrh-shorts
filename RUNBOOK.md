@@ -23,6 +23,14 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 3. Run the skill's `scripts/setup.sh`. Whisper may fail to download (Hugging Face is blocked here): that is fine, `words.py`
    falls back to spreading words inside the exact voice line times. Node, ffmpeg, Chrome, Kokoro voice must be OK.
 
+## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
+
+- Publish slots are 08:00, 13:00 and 19:00 **America/New_York** time, every day.
+- Take the earliest slot that is at least **20 hours after now** and is not already used by a line in `topics.md`.
+  (Runs start at about 06:15, 12:15 and 17:20 New York time, so each run fills the matching slot of the next day.)
+- Convert the slot to UTC (`TZ=America/New_York date -d ... -u +%Y-%m-%dT%H:%M:%SZ`, mind daylight saving time).
+  That UTC time is `PUBLISH_AT`.
+
 ## 2. Pick the story
 
 - Read `topics.md`. Never repeat a story, and avoid two stories on the same theme back to back.
@@ -72,13 +80,22 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 3. Upload: Zapier `youtube_upload_video` (selected_api `YouTubeV4CLIAPI`, action `upload_video`) with the connection_id,
    params: `video` = raw URL, `title` (≤ 60 chars, curiosity hook, 1 emoji max, no clickbait lies), `description`
    (2-3 sentence story teaser, "This is a true story.", Sources line, subscribe line with @WaitThatReallyHappenedUS,
-   then `#shorts` + 4-6 hashtags), `tags` (8-12), `category_id` "27", `privacy_status` "public", `made_for_kids` "false",
+   then `#shorts` + 4-6 hashtags), `tags` (8-12), `category_id` "27", `privacy_status` "private",
+   `publish_at` = PUBLISH_AT (ISO UTC, e.g. 2026-11-22T13:00:00Z), `made_for_kids` "false",
    `embeddable` "true", `notify_subscribers` "true", `default_language` "en", `default_audio_language` "en",
-   `license` "youtube".
-4. Check with GET `videos?part=status,processingDetails&id=<id>` that it is public and not rejected.
-5. Append one line to `topics.md` on `main`: `- YYYY-MM-DD · <title> · https://youtu.be/<id> · <one-line topic> · <main source>`,
-   commit and push `main`.
+   `license` "youtube". (YouTube makes a private video with publishAt go public by itself at that time.)
+   - If Zapier rejects `publish_at`: upload with `privacy_status` "private" and no publish_at, then call
+     `youtube_make_api_mutating_request` PUT `https://www.googleapis.com/youtube/v3/videos?part=status` with body
+     `{"id":"<id>","status":{"privacyStatus":"private","publishAt":"<PUBLISH_AT>","selfDeclaredMadeForKids":false}}`.
+   - If that also fails, set the video public with the same PUT (`"privacyStatus":"public"`, no publishAt) and say so
+     in the report.
+4. Check with GET `videos?part=status,processingDetails&id=<id>` that `status.publishAt` equals PUBLISH_AT (or that it
+   is public, in the fallback case) and that the upload was not rejected.
+5. Append one line to `topics.md` on `main`:
+   `- <slot, e.g. 2026-11-22 13:00 ET> · <title> · https://youtu.be/<id> · <one-line topic> · <main source>`,
+   then `git pull --rebase` and push `main` (retry once if another run pushed first).
 
 ## 5. Report
 
-End with a short message in Hindi written in Roman letters: the title, the link, and anything that went wrong.
+End with a short message in Hindi written in Roman letters: the title, the link, the scheduled publish time in India
+time (IST) and US Eastern time, and anything that went wrong.
