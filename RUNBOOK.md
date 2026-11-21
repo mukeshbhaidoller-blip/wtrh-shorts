@@ -25,9 +25,9 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 
 ## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
 
-- Publish slots are 08:00, 13:00 and 19:00 **America/New_York** time, every day.
+- TWO videos per day. Publish slots are 12:00 and 19:00 **America/New_York** time, every day.
 - Take the earliest slot that is at least **20 hours after now** and is not already used by a line in `topics.md`.
-  (Runs start at about 06:15, 12:15 and 17:20 New York time, so each run fills the matching slot of the next day.)
+  (Runs start at about 06:15 and 12:15 New York time, so the pipeline always stays about one day ahead.)
 - Convert the slot to UTC (`TZ=America/New_York date -d ... -u +%Y-%m-%dT%H:%M:%SZ`, mind daylight saving time).
   That UTC time is `PUBLISH_AT`.
 
