@@ -95,6 +95,20 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
    - Spot lights point along their local -Z: rotation X=+83° aims them forward (+Y) and slightly down.
    - Keep the caption band (y 1230-1380 of 1920) free of the key subject.
    - Avoid huge object counts with glass (slow); a few hundred small instances is fine.
+2b. **A person in the video (owner's wish, 2026-11-21): the viewer should feel he is the one there.** Put a realistic
+   human (`blender/character.py`, MPFB/MakeHuman, CC0) in at least 3-5 shots, doing what the line says: standing by the
+   machine, pointing at the part being explained, holding or using the tool, walking up to it, looking at it. Like the
+   Mildly Elsewhere references (a worker with a cap and a shovel on the beach).
+   - `arm = person('Worker', loc=(x, y, 0), rot_z=math.radians(a), outfit='worker'|'casual'|'office', stance='relax')`
+     (faces -Y at rot_z 0). Then `pose(arm, t, STANCES['point_r'])` / `pose(arm, t, {...bone: (x, y, z)})` to animate,
+     `walk(arm, t0, t1)` while you keyframe `arm.location` yourself, `hold(arm, prop, 'wrist.R', offset, rot)` for tools.
+     Bone axes are documented at the top of `STANCES` in character.py. Keep moves slow and small: big fast limb moves
+     look robotic. Medium/wide framing (full body or waist up) looks most real; avoid face close-ups.
+   - People exist ONLY on the PC (MPFB is installed in the PC's Blender, not in the cloud venv: `person()` returns None
+     here). So for shots with people, after the cloud stills, check them ON THE PC:
+     `python3 blender/build_job.py stills --proj <proj> --shots <proj>/shots.py --name <job>-stills --out /mnt/user-data/outputs/jobs/<job>-stills --sel 2,5`
+     → commit the printed files + `ready.txt` → wait for `done.txt` (~1-2 min) → stage `test/shotNN.jpg` and look
+     (hands not inside the body or props, feet on the ground, clothes OK, face not creepy). Fix and repeat once.
 3. Test stills in the cloud, ALWAYS before sending a job: stage the textures/HDRIs you use from `D:\Ai Video Edit\assets`
    with `device_stage_files` (they land in `/mnt/user-data/uploads/Ai Video Edit/assets`), copy `data/lines.json` to
    `<proj>/timing.json`, then

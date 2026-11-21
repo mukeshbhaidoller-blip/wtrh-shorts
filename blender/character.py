@@ -32,15 +32,58 @@ def _pick(LS, sub, keys, ext):
     return None
 
 
-def person(name='Person', loc=(0, 0, 0), rot_z=0.0, male=1.0, age=0.45, muscle=0.6, weight=0.55, height=0.55,
-           race=(0.2, 0.7, 0.1), skin=('young_caucasian_male', 'middleage_caucasian_male', 'caucasian_male', 'male'),
-           hair=('short02', 'short04', 'short'), clothes=(('tshirt', 'shirt'), ('jeans', 'pants', 'trouser'), ('shoes', 'boots', 'sneaker')),
-           extra=(), eyebrows=('eyebrow001',), subdiv=1):
+# Outfits that looked right in the PC test (2026-11-21). Keywords are matched against installed .mhclo names.
+OUTFITS = dict(
+    casual=dict(clothes=(('namuhekam_male_polo_shirt',), ('toigo_wool_pants', 'cortu_cargo_pants'), ('toigo_ankle_boots_male', 'shoes02')), extra=(('jujube_newsboy_cap',),)),
+    worker=dict(clothes=(('male_worksuit01',), ('toigo_ankle_boots_male', 'shoes02')), extra=()),
+    office=dict(clothes=(('male_casualsuit02', 'male_casualsuit01'), ('shoes01', 'shoes02')), extra=()),
+)
+# Bone rotations (degrees, local XYZ) learned from the PC tests on the MPFB 'default' rig:
+#   upperarm01.L: Z- lowers the arm to the side, X+ raises it forward/up.  upperarm01.R: mirrored Z (Z+ lowers).
+#   lowerarm01.*: X+ bends the elbow.  upperleg01.*: X- swings the leg forward, X+ back.  lowerleg01.*: X+ bends the knee.
+#   spine02: X+ bends forward.  neck01: Z turns/tilts the head.  A BVH pose ('standing02') gives the most natural idle.
+STANCES = dict(
+    relax={'upperarm01.L': (0, 0, -55), 'upperarm01.R': (0, 0, 55), 'lowerarm01.L': (10, 0, 0), 'lowerarm01.R': (10, 0, 0)},
+    point_r={'upperarm01.L': (0, 0, -55), 'upperarm01.R': (45, 0, 25), 'lowerarm01.R': (5, 0, 0), 'lowerarm01.L': (10, 0, 0)},
+    wave_r={'upperarm01.L': (0, 0, -55), 'upperarm01.R': (75, 0, 30), 'lowerarm01.R': (5, 0, 0)},
+    work_low={'spine02': (22, 0, 0), 'upperarm01.L': (55, 0, -30), 'upperarm01.R': (45, 0, 30), 'lowerarm01.L': (40, 0, 0), 'lowerarm01.R': (40, 0, 0)},
+    step_a={'upperleg01.L': (-22, 0, 0), 'upperleg01.R': (16, 0, 0), 'lowerleg01.R': (28, 0, 0), 'upperarm01.L': (-12, 0, -58), 'upperarm01.R': (16, 0, 58)},
+    step_b={'upperleg01.R': (-22, 0, 0), 'upperleg01.L': (16, 0, 0), 'lowerleg01.L': (28, 0, 0), 'upperarm01.R': (-12, 0, 58), 'upperarm01.L': (16, 0, -58)},
+)
+
+
+def bvh_pose(arm, name='standing02'):
+    """Apply one of the installed MakeHuman BVH poses (standing01-06, sit01, run01, fight01..) as the base pose.
+    Note: it rewrites bone rolls, so add STANCES on top only after checking a test still."""
+    mp = _mpfb()
+    if not mp or arm is None: return False
+    try:
+        pkg = next(k for k in _MP)
+        AS = import_module(pkg + '.services.animationservice').AnimationService
+        f = glob.glob(os.path.join(mp['LS'].get_user_data('poses'), '**', name + '.bvh'), recursive=True)[0]
+        AS.import_bvh_file_as_pose(arm, f); return True
+    except Exception as e:
+        print('BVH POSE FAILED', name, e); return False
+
+
+def walk(arm, t0, t1, step=0.55):
+    """Simple keyframed walk cycle between shot times t0..t1 (move the armature's location yourself)."""
+    t, k = t0, 0
+    while t <= t1:
+        pose(arm, t, STANCES['step_a' if k % 2 == 0 else 'step_b']); t += step; k += 1
+
+
+def person(name='Person', loc=(0, 0, 0), rot_z=0.0, outfit='casual', male=1.0, age=0.5, muscle=0.62, weight=0.58, height=0.55,
+           race=(0.2, 0.7, 0.1), skin=('middleage_caucasian_male', 'young_caucasian_male2', 'young_caucasian_male'),
+           hair=('short02', 'short04', 'short'), clothes=None, extra=None, eyebrows=('eyebrow001',), subdiv=1, stance='relax'):
     """Make a rigged realistic human (MPFB 'default' rig). Returns the armature object (or None if MPFB is missing).
     clothes/extra: tuples of keyword alternatives, e.g. ('cap', 'hat'). race = (african, caucasian, asian)."""
     mp = _mpfb()
     if not mp:
         print('MPFB not available: person() skipped'); return None
+    o = OUTFITS.get(outfit, OUTFITS['casual'])
+    clothes = o['clothes'] if clothes is None else clothes
+    extra = o['extra'] if extra is None else extra
     HS, LS = mp['HS'], mp['LS']
     info = HS._create_default_human_info_dict()
     info['phenotype'].update(gender=male, age=age, muscle=muscle, weight=weight, height=height, proportions=0.6)
@@ -66,6 +109,7 @@ def person(name='Person', loc=(0, 0, 0), rot_z=0.0, male=1.0, age=0.45, muscle=0
     root.name = name; root.location = loc; root.rotation_euler = (0, 0, rot_z)
     if arm:
         for b in arm.pose.bones: b.rotation_mode = 'XYZ'
+        if stance in STANCES: pose(arm, 0.0, STANCES[stance])
     return root
 
 

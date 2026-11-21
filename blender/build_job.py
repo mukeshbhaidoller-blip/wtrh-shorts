@@ -95,7 +95,7 @@ cd /d "%~dp0"
 set "BL={BLENDER}"
 set "FF={FFMPEG}"
 echo === BLENDER START %DATE% %TIME% === > "job-log.txt"
-"%BL%" -b --factory-startup -P kit.py -- --proj "%~dp0." --assets "{ASSETS}" --samples {samples} 2>&1 | findstr /C:"=== " /C:"GPU device" /C:"Error" /C:"Traceback" /C:"line " >> "job-log.txt"
+"%BL%" -b -P kit.py -- --proj "%~dp0." --assets "{ASSETS}" --samples {samples} 2>&1 | findstr /C:"=== " /C:"GPU device" /C:"Error" /C:"Traceback" /C:"line " >> "job-log.txt"
 echo === BLENDER END %TIME% === >> "job-log.txt"
 "%FF%" -v error -y -framerate 24 -i "frames\\%%05d.jpg" -i "mix.wav" {ins} -filter_complex "{';'.join(filt)}" -map "[vout]" -map 1:a -c:v libx264 -crf 18 -preset medium -c:a aac -b:a 192k -shortest -movflags +faststart "final.mp4" >> "job-log.txt" 2>&1
 "%FF%" -v error -y -i "final.mp4" -c:v libx264 -crf 23 -maxrate 5M -bufsize 10M -preset medium -c:a aac -b:a 160k -movflags +faststart "share.mp4" >> "job-log.txt" 2>&1
@@ -112,6 +112,22 @@ echo === JOB END %TIME% === >> "job-log.txt"
     print(json.dumps([{'devicePath': f'D:\\Ai Video Edit\\jobs\\{name}\\' + f.replace('/', '\\'), 'stagedPath': f'{out}/{f}'} for f in files]))
 
 
+def stills_job(proj, shots, name, out, shots_sel=''):
+    """Test stills ON THE PC (needed for shots with people: MPFB only exists there). Writes test/shotNN.jpg."""
+    os.makedirs(out, exist_ok=True)
+    for f in ('kit.py', 'character.py'): shutil.copy(f'{HERE}/{f}', f'{out}/{f}')
+    shutil.copy(shots, f'{out}/shots.py'); shutil.copy(f'{proj}/data/lines.json', f'{out}/timing.json')
+    sel = f' --shots {shots_sel}' if shots_sel else ''
+    bat = f'''@echo off
+cd /d "%~dp0"
+"{BLENDER}" -b -P kit.py -- --proj "%~dp0." --assets "{ASSETS}" --samples 24 --scale 0.5 --test{sel} > blender-out.txt 2>&1
+echo done > result.txt
+'''
+    open(f'{out}/job.bat', 'w', newline='').write(bat.replace('\n', '\r\n'))
+    files = ['kit.py', 'character.py', 'shots.py', 'timing.json', 'job.bat']
+    print(json.dumps([{'devicePath': f'D:\\Ai Video Edit\\jobs\\{name}\\{f}', 'stagedPath': f'{out}/{f}'} for f in files]))
+
+
 def tg_job(name, render_job, caption, out):
     """A tiny job that sends <render_job>\\share.mp4 to the owner's Telegram with caption.txt (UTF-8)."""
     os.makedirs(out, exist_ok=True)
@@ -125,10 +141,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "D:\\Ai Video Edit\\_claude\
 
 
 if __name__ == '__main__':
-    ap = argparse.ArgumentParser(); ap.add_argument('cmd', choices=['cues', 'job', 'tg'])
+    ap = argparse.ArgumentParser(); ap.add_argument('cmd', choices=['cues', 'job', 'tg', 'stills'])
     ap.add_argument('--proj'); ap.add_argument('--shots'); ap.add_argument('--name'); ap.add_argument('--out')
-    ap.add_argument('--samples', type=int, default=48); ap.add_argument('--render-job'); ap.add_argument('--caption')
+    ap.add_argument('--samples', type=int, default=48); ap.add_argument('--sel', default=''); ap.add_argument('--render-job'); ap.add_argument('--caption')
     a = ap.parse_args()
     if a.cmd == 'cues': cues(a.proj)
     elif a.cmd == 'job': job(a.proj, a.shots, a.name, a.out, a.samples)
+    elif a.cmd == 'stills': stills_job(a.proj, a.shots, a.name, a.out, a.sel)
     else: tg_job(a.name, a.render_job, a.caption, a.out)
