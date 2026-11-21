@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Inter'; font-weight: 900; src: url('fonts/Inter-Black.otf'); }
+@font-face { font-family: 'Inter'; font-weight: 800; src: url('fonts/Inter-ExtraBold.otf'); }
+html,body{margin:0;background:#000} canvas{display:block}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head><body><canvas id="c"></canvas>
+<script type="module">
+import { drawToon, INK } from './src/core/toon.js';
+import { drawRat, RPROPS } from './src/core/rats.js';
+await document.fonts.load('900 100px Inter'); await document.fonts.load('800 100px Inter');
+const mode = location.search.slice(1);
+const c = document.getElementById('c'), g = c.getContext('2d');
+const toon = (look, st, x, y, s) => { const off = document.createElement('canvas'); off.width = 512; off.height = 1024; drawToon(off.getContext('2d'), look, st); g.drawImage(off, x, y, 512 * s, 1024 * s); };
+const BOSS = { body: '#3E5FA8', hat: 'tophat', hatCol: '#2A2638', neck: 'bowtie', neckCol: '#D8343F', pattern: 'vest', patCol: '#2A2638', extra: ['mustache', 'monocle'] };
+const HERO = { body: '#E8734A', hat: 'boater', hatCol: '#E8C77A', band: '#B5372E', neck: 'scarf', neckCol: '#F2C230', extra: ['freckles'] };
+const LADY = { body: '#F2B8C6', hat: 'flower', hatCol: '#F29BB5', pattern: 'apron', patCol: '#FFF4E0', extra: ['blush'] };
+function burst(x, y, r, n, col) { g.save(); g.translate(x, y); g.beginPath(); for (let i = 0; i < n * 2; i++) { const a = i / (n * 2) * Math.PI * 2, rr = i % 2 ? r * 0.62 : r; g.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } g.closePath(); g.fillStyle = col; g.fill(); g.lineWidth = r * 0.06; g.strokeStyle = INK; g.stroke(); g.restore(); }
+function txt(t, x, y, size, fill, stroke = 0.16, font = 900) { g.font = `${font} ${size}px Inter`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round'; if (stroke > 0) { g.lineWidth = size * stroke; g.strokeStyle = INK; g.strokeText(t, x, y); } g.fillStyle = fill; g.fillText(t, x, y); }
+if (mode === 'logo') {
+  c.width = c.height = 800;
+  const gr = g.createRadialGradient(400, 360, 40, 400, 400, 560); gr.addColorStop(0, '#FFE066'); gr.addColorStop(1, '#F59E2B'); g.fillStyle = gr; g.fillRect(0, 0, 800, 800);
+  g.globalAlpha = 0.18; g.fillStyle = '#FFFFFF'; for (let i = 0; i < 16; i++) { g.save(); g.translate(400, 400); g.rotate(i / 16 * Math.PI * 2); g.beginPath(); g.moveTo(0, 0); g.lineTo(600, -70); g.lineTo(600, 70); g.closePath(); g.fill(); g.restore(); } g.globalAlpha = 1;
+  toon(HERO, { mood: 'shock', armL: [150, 30], armR: [150, 30], sweat: 1 }, 400 - 512 * 1.55 / 2, 70, 1.55);
+} else {
+  c.width = 2560; c.height = 1440;
+  const sky = g.createLinearGradient(0, 0, 0, 1440); sky.addColorStop(0, '#3D8EE0'); sky.addColorStop(0.75, '#BFE4F7'); g.fillStyle = sky; g.fillRect(0, 0, 2560, 1440);
+  g.fillStyle = 'rgba(255,255,255,0.9)'; [[300, 230, 1], [900, 160, 0.8], [1800, 210, 1.1], [2300, 140, 0.7], [1300, 300, 0.6]].forEach(([x, y, s]) => { [[0, 0, 70], [60, -25, 60], [120, 0, 65], [60, 20, 70]].forEach(([dx, dy, r]) => { g.beginPath(); g.arc(x + dx * s, y + dy * s, r * s, 0, 7); g.fill(); }); });
+  // little town skyline
+  const shops = ['#C9603F', '#6FA3B8', '#E3C16F', '#9E4A3A', '#B98ACF', '#E6D3A3', '#5FA39A', '#E58A6A', '#C7B79A', '#D9A34A', '#7FA36A', '#A3485A'];
+  let x = -40, k = 0; while (x < 2600) { const w = 170 + (k * 37) % 90, h = 260 + (k * 53) % 180; g.fillStyle = shops[k % shops.length]; g.fillRect(x, 1140 - h, w, h); g.lineWidth = 8; g.strokeStyle = INK; g.strokeRect(x, 1140 - h, w, h);
+    g.fillStyle = '#9CC7E4'; for (let r = 0; r < 2; r++) for (let q = 0; q < 2; q++) { g.fillRect(x + 25 + q * (w / 2 - 10), 1140 - h + 40 + r * 90, w / 2 - 45, 55); g.strokeRect(x + 25 + q * (w / 2 - 10), 1140 - h + 40 + r * 90, w / 2 - 45, 55); } x += w + 6; k++; }
+  g.fillStyle = '#C98A52'; g.fillRect(0, 1140, 2560, 300); g.fillStyle = '#A8693E'; g.fillRect(0, 1140, 2560, 34);
+  // title panel inside the safe area (507..2053 x 508..931)
+  g.save(); g.fillStyle = '#F4EBD6'; g.strokeStyle = INK; g.lineWidth = 12; g.beginPath(); g.roundRect(560, 515, 1440, 410, 36); g.fill(); g.stroke(); g.restore();
+  txt('WAIT, THAT REALLY', 1280, 612, 122, '#FFFFFF', 0.14); txt('HAPPENED', 1280, 768, 140, '#FFD43B', 0.14);
+  txt('TRUE STORIES  •  60-SECOND CARTOONS  •  NEW SHORTS DAILY', 1280, 878, 44, '#1F1C33', 0, 800);
+  // characters outside the safe area (visible on TV / desktop)
+  toon(BOSS, { mood: 'shock', armR: [150, 20], holdR: RPROPS.magnifier, armL: [140, 20], sweat: 1 }, 120, 470, 0.9);
+  toon(LADY, { mood: 'laugh', armL: [150, 20], armR: [150, 20] }, 2000, 470, 0.9);
+  drawRat(g, 520, 1290, 0.7, { tail: false, mood: 'sly' }); drawRat(g, 2080, 1300, 0.55, { tail: true, mood: 'happy' });
+  burst(2010, 520, 80, 10, '#FFFFFF'); txt('?!', 2010, 526, 80, '#D8343F', 0.12);
+}
+document.title = 'READY';
+</script></body></html>
