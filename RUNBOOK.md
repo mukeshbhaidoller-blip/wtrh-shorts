@@ -1,7 +1,13 @@
 # RUNBOOK: one new Short for "Wait, That Really Happened"
 
 Each scheduled run makes ONE brand-new Short from start to finish and uploads it. Follow every step in order.
-Do not ask the owner anything during a run: nobody is watching. If a step fails in a way you cannot fix, do NOT
+Do not ask the owner anything during a run: nobody is watching (runs happen at night while he sleeps).
+
+**NEVER use any tool that waits for a human approval.** In particular: NEVER call WebFetch (every new website asks the
+owner for permission and the run would hang all night). Check facts with **WebSearch only** (use `mode: "extended"`
+when the standard results are thin); the search snippets are your sources. Do not use computer-use / screen tools or
+browsers either: the PC is reached only through the `mcp__remote-devices__` file tools and the jobs folder. If some
+tool still asks for approval, skip that step and use another way. If a step fails in a way you cannot fix, do NOT
 upload; finish with a short note (in Hindi written in Roman letters) saying what failed.
 
 ## Fixed facts (never change these)
@@ -56,8 +62,8 @@ The owner approved the realistic Blender road-lines Short (`reference/road-lines
     "But <problem>." → "So, <real fix>." Finish with "You see, <hidden science>." + "That's why <everyday thing>."
   - **B. "This <machine> just <amazing thing>" (25-35 s).** Wow line, 4-6 how-it-works lines, one surprising number.
 - Read `topics.md`: never repeat a topic, no two on the same theme back to back.
-- Use WebSearch: confirm every fact and number on at least 2 reliable sources (.gov, manufacturers, engineering
-  references, encyclopedias, major outlets). List them in `script.json` "sources". Original script only.
+- Use WebSearch ONLY (never WebFetch): confirm every fact and number on at least 2 reliable sources (.gov,
+  manufacturers, engineering references, encyclopedias, major outlets) from the search results. List them in `script.json` "sources". Original script only.
 - **Pick topics you can SHOW realistically in Blender**: things built from simple strong shapes with great materials
   (concrete, steel, glass, rubber, asphalt, wood, water, snow, light). Very complex hero objects (a whole car, a whole
   airliner) only if a free model exists (see 3.4) or the shot can be close-up / part-only / silhouette at night.
