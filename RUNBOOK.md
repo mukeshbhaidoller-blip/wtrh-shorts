@@ -38,6 +38,15 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
    Diffuse/nor_gl/Rough jpgs, HDRIs as `<id>.hdr`; `device_list_dir` it to see what is there); helper scripts in `_claude\`;
    jobs in `jobs\<name>\`. GPU: RTX 5060 8 GB (OptiX), Cycles ≈ 1.1-2.5 s per 1080x1920 frame at 48 samples.
 
+## 1a. Pending uploads first
+
+If `pending/*.json` exists (a finished video whose upload failed, e.g. Zapier "throttled" = YouTube's daily upload
+quota, which resets at midnight Pacific = 13:30 IST), handle the oldest one BEFORE making a new video: its MP4 is on the
+git branch named in the file (and on the PC). Give it the earliest free slot (section 1b, must be >= 2 h ahead), upload
+it exactly like section 4 (same metadata), send it to Telegram (4b), log it in topics.md (replace its NOT UPLOADED line),
+delete the pending json, push. If the upload is throttled again, stop the run (don't make a new video), report it.
+Then continue with a new video only if this run still has time.
+
 ## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
 
 - TWO videos per day. Publish slots are 12:00 and 19:00 **America/New_York** time, every day.
