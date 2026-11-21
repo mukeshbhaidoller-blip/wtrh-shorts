@@ -114,7 +114,7 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
 6. Wait: poll `device_list_dir D:\Ai Video Edit\jobs\<job>` with foreground `sleep 540` between checks until `done.txt`
    exists (≈ 25-50 min). Never end the turn while it runs. `job-log.txt` there shows progress; `result.txt` says
    `RENDER_OK`. If it failed: read `job-log.txt`, fix, make a new job name, run again (once).
-7. QA: `device_stage_files` `jobs\<job>\final.mp4`, ffprobe it (1080x1920, ≤ 59 s, audio), make a contact sheet every
+7. QA (the job deletes its `frames` folder after a good render, so a re-render of one shot needs `--redo` of only that shot PLUS re-rendering is not possible without frames: in that case re-render the whole job): `device_stage_files` `jobs\<job>\final.mp4`, ffprobe it (1080x1920, ≤ 59 s, audio), make a contact sheet every
    2 s and LOOK. One bad shot: fix it, re-test, and re-render just that shot with a job whose `job.bat` passes
    `--shots N --redo N` to Blender in the same job folder layout (copy job.bat and edit), then compose again.
 8. Usage: don't re-read big files, keep sheets small, look only at changed frames.

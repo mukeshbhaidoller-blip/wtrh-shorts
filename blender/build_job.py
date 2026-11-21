@@ -100,6 +100,9 @@ echo === BLENDER END %TIME% === >> "job-log.txt"
 "%FF%" -v error -y -framerate 24 -i "frames\\%%05d.jpg" -i "mix.wav" {ins} -filter_complex "{';'.join(filt)}" -map "[vout]" -map 1:a -c:v libx264 -crf 18 -preset medium -c:a aac -b:a 192k -shortest -movflags +faststart "final.mp4" >> "job-log.txt" 2>&1
 "%FF%" -v error -y -i "final.mp4" -c:v libx264 -crf 23 -maxrate 5M -bufsize 10M -preset medium -c:a aac -b:a 160k -movflags +faststart "share.mp4" >> "job-log.txt" 2>&1
 if exist share.mp4 (echo RENDER_OK > result.txt) else (echo RENDER_FAILED > result.txt)
+rem keep the D: drive clean: drop this job's frames once the video exists, and job folders older than 10 days
+if exist share.mp4 rd /s /q frames
+forfiles /p "D:\\Ai Video Edit\\jobs" /d -10 /c "cmd /c if @isdir==TRUE rd /s /q @path" > nul 2>&1
 echo === JOB END %TIME% === >> "job-log.txt"
 '''
     if len(bat) > 7800: raise SystemExit('job.bat too long for cmd.exe: use fewer caption chunks')
