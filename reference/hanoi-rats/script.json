@@ -1,0 +1,88 @@
+{
+  "title": "The City That Paid People To Farm Rats",
+  "voice": "am_michael",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 1.2,
+  "gap": 0.18,
+  "music": "bounce",
+  "sources": [
+    "Wikipedia, 'Great Hanoi Rat Massacre' (1902, French colonial Hanoi; bounty of 1 cent per rat tail; officials began noticing rats with no tails; bounty programme cancelled; historian Michael G. Vann)",
+    "Atlas Obscura, 'The Great Hanoi Rat Massacre of 1902' (rats spread through Hanoi's new sewer system; hired rat hunters went into the sewers; 7,985 rats killed in the last week of April 1902)",
+    "Saigoneer, 'The Great Hanoi Rat Massacre' (rats popping up in Hanoi's swankiest toilets; plague cases; over 20,000 rats killed in a single day in June 1902; tailless rats in the outskirts)",
+    "ScienceBlog summary of Vann's archive research (sewer crews killed 20,114 rats on 12 June 1902; public bounty of one cent per tail so offices didn't handle carcasses; an official found villagers breeding rats outside town)",
+    "Michael G. Vann, The Great Hanoi Rat Hunt (Oxford University Press, 2018)"
+  ],
+  "lines": [
+    {
+      "text": "In 1902, the city of Hanoi paid people to get rid of rats,",
+      "caps": "In 1902, | the city | of Hanoi | paid | people | to get | rid of | rats,"
+    },
+    {
+      "text": "and somehow made the problem even worse."
+    },
+    {
+      "text": "See, the city had just built shiny new sewers,"
+    },
+    {
+      "text": "and the rats loved them."
+    },
+    {
+      "text": "They popped out of fancy toilets,"
+    },
+    {
+      "text": "and people feared the plague."
+    },
+    {
+      "text": "So the city hired rat catchers,"
+    },
+    {
+      "text": "who caught over twenty thousand rats in one day.",
+      "caps": "who | caught | over | 20,000 | rats | in one | day."
+    },
+    {
+      "text": "But the rats kept coming."
+    },
+    {
+      "text": "So the city made everyone a deal."
+    },
+    {
+      "text": "Bring us a rat's tail, and we'll pay you one cent.",
+      "caps": "Bring us | a rat's | tail, | and we'll | pay | you | 1 cent."
+    },
+    {
+      "text": "Just the tail, so nobody had to carry dead rats."
+    },
+    {
+      "text": "And the tails came pouring in."
+    },
+    {
+      "text": "But then, officials noticed something weird."
+    },
+    {
+      "text": "Rats running around with no tails."
+    },
+    {
+      "text": "See, people caught a rat, snipped off the tail,"
+    },
+    {
+      "text": "and let it go, to make more baby rats,"
+    },
+    {
+      "text": "with brand new tails."
+    },
+    {
+      "text": "Some even started rat farms outside of town."
+    },
+    {
+      "text": "So the city canceled the deal,"
+    },
+    {
+      "text": "because it wasn't getting rid of rats."
+    },
+    {
+      "text": "It was paying people to farm them.",
+      "gap": 0.3
+    }
+  ]
+}
