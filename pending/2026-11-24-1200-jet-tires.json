@@ -1,0 +1,108 @@
+{
+ "status": "NOT UPLOADED - YouTube upload via Zapier throttled 4x on 2026-11-21 ~18:20-18:40 UTC (5 uploads already that day; likely YouTube API daily quota). Video is fine (QA passed).",
+ "video_branch": "pending-2026-11-24-1200-jet-tires (video.mp4)",
+ "video_on_pc": "D:\\Ai Video Edit\\jobs\\2026-11-24-1200-jet-tires\\final.mp4 (share.mp4 for Telegram)",
+ "planned_slot_et": "2026-11-24 12:00 ET (publish_at 2026-11-24T17:00:00Z)",
+ "upload_params": {
+  "title": "These Tires Hit the Runway at 150 MPH ✈️",
+  "description": "Jet tires slam into the runway at about 150 mph without even spinning, so they skid and smoke. Here's how they survive: about 200 psi of dry nitrogen, little plugs in the wheel that melt before a hot tire can burst, and fresh tread put on the same tire again and again.\n\nSources: 14 CFR 25.733 (FAA); FAA AC 20-97B and AC 145-4A; US patents 4628953 and 3138406; Simple Flying.\n\nSubscribe to @WaitThatReallyHappenedUS for more of how big machines really work.\n\n#shorts #aviation #airplane #engineering #howitworks #pilot",
+  "tags": [
+   "airplane tires",
+   "jet tires",
+   "aircraft tires",
+   "nitrogen tires",
+   "landing gear",
+   "aviation",
+   "airplane landing",
+   "how it works",
+   "engineering",
+   "fuse plug",
+   "retread",
+   "shorts"
+  ],
+  "category_id": "27"
+ },
+ "script": {
+  "title": "These Tires Hit the Runway at 150 MPH",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.3,
+  "outro": 0.8,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+   "Simple Flying / AeroHaber, 'How Commercial Aircraft Tires Survive 150mph Runway Contact Under 20 Tonnes Of Weight Without Bursting' (touchdown around 150 mph)",
+   "SWISS magazine, 'Why do airplane tires cause smoke at touchdown?' and Physics Forums 'Commercial aircraft tire skids': wheels are not turning at touchdown, they skid briefly while spinning up, rubber smokes",
+   "The Points Guy, 'All about aircraft tires' and Simple Flying: airliner tires inflated to about 200 psi, roughly six times a car tire (car ~32-35 psi)",
+   "14 CFR 25.733(e) (Cornell LII, GovInfo): airplanes over 75,000 lb must inflate tires on braked wheels with dry nitrogen or other inert gas, max 5% oxygen",
+   "FAA AC 20-97B 'Aircraft Tire Maintenance and Operational Practices' (nitrogen inflation, heat)",
+   "Google Patents US4628953 'Fusible plug safety device for venting aircraft tires' and US3138406 'Fuse plugs for wheels': plugs in the wheel melt from brake heat and vent the tire before it can burst",
+   "Migflug, 'Aircraft Tyres and Carbon Brakes: Nitrogen, Retreads and Fuse Plugs'",
+   "FAA AC 145-4A 'Inspection, Retread, Repair, and Alterations of Aircraft Tires': worn aircraft tires are retreaded and reused"
+  ],
+  "lines": [
+   {
+    "text": "These tires hit the runway at a hundred fifty miles an hour, without even spinning.",
+    "caps": "These tires hit the runway | at 150 miles an hour, | without even spinning.",
+    "sfx": [
+     {
+      "at": 2.0,
+      "type": "thud",
+      "gain": 0.4
+     }
+    ]
+   },
+   {
+    "text": "For a split second they skid, and the rubber goes up in smoke.",
+    "caps": "For a split second | they skid, | and the rubber goes up in smoke.",
+    "sfx": [
+     {
+      "at": 0.3,
+      "type": "sizzle",
+      "gain": 0.3
+     }
+    ]
+   },
+   {
+    "text": "To carry the jet, they're pumped to about two hundred psi, six times a car tire.",
+    "caps": "To carry the jet, | they're pumped to about 200 psi, | 6 times a car tire."
+   },
+   {
+    "text": "But hard braking makes the brakes glow hot,",
+    "caps": "But hard braking | makes the brakes glow hot,"
+   },
+   {
+    "text": "so the tires are filled with dry nitrogen, which can't feed a fire the way air can.",
+    "caps": "so the tires are filled | with dry nitrogen, | which can't feed a fire | the way air can."
+   },
+   {
+    "text": "And if the heat still climbs, little plugs in the wheel melt,",
+    "caps": "And if the heat still climbs, | little plugs | in the wheel melt,"
+   },
+   {
+    "text": "and let the gas out, so the tire goes flat instead of bursting.",
+    "caps": "and let the gas out, | so the tire goes flat | instead of bursting.",
+    "sfx": [
+     {
+      "at": 0.2,
+      "type": "whoosh",
+      "gain": 0.3
+     }
+    ]
+   },
+   {
+    "text": "When the tread wears down, they don't throw the tire away.",
+    "caps": "When the tread wears down, | they don't throw | the tire away."
+   },
+   {
+    "text": "They put fresh tread on the same tire, again and again.",
+    "caps": "They put fresh tread | on the same tire, | again and again."
+   },
+   {
+    "text": "That's why jet tires almost never pop, even at a hundred fifty miles an hour.",
+    "caps": "That's why jet tires | almost never pop, | even at 150 miles an hour.",
+    "gap": 0.3
+   }
+  ]
+ }
+}
