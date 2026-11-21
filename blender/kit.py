@@ -499,6 +499,9 @@ def main():
             bpy.ops.render.render(animation=True)
         print(f'=== SHOT {i:02d} DONE ===', flush=True)
 
+_ch = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'character.py')
+if os.path.exists(_ch):
+    exec(compile(open(_ch, encoding='utf-8').read(), 'character.py', 'exec'), globals())
 SHOTS = []
 exec(compile(open(os.path.join(A.proj, 'shots.py'), encoding='utf-8').read(), 'shots.py', 'exec'), globals())
 assert len(SHOTS) == len(LINES), f'need one shot per line: {len(SHOTS)} shots vs {len(LINES)} lines'

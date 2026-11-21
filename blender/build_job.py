@@ -81,7 +81,7 @@ def draw_caps(caps, outdir):
 def job(proj, shots, name, out, samples):
     S, L, W = load(proj)
     os.makedirs(out, exist_ok=True)
-    shutil.copy(f'{HERE}/kit.py', f'{out}/kit.py'); shutil.copy(shots, f'{out}/shots.py')
+    shutil.copy(f'{HERE}/kit.py', f'{out}/kit.py'); shutil.copy(f'{HERE}/character.py', f'{out}/character.py'); shutil.copy(shots, f'{out}/shots.py')
     shutil.copy(f'{proj}/data/lines.json', f'{out}/timing.json'); shutil.copy(f'{proj}/data/mix.wav', f'{out}/mix.wav')
     caps = caption_list(S, L, W); draw_caps(caps, f'{out}/caps')
     filt = []; prev = '0:v'
