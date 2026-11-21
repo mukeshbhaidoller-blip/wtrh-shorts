@@ -1,0 +1,34 @@
+{
+  "title": "If You Paint a Line on a Road...",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.3,
+  "outro": 1.0,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+    "TxDOT Pavement Marking Handbook: thermoplastic applied at 400-450 F (420 F recommended); glass beads intermixed and on the surface",
+    "SWARCO Thermoplastic Field Guide: beads dropped on the hot stripe right after application, embedded 50-60%; beads give night-time retroreflectivity",
+    "US patent 9732480 summary: thermoplastic markings last 3 to 6 years",
+    "Snopes / Wikipedia 'Botts' dots' / Caltrans history: Elbert Botts' Caltrans research into raised pavement markers because paint was not visible in the rain",
+    "Wikipedia 'Raised pavement marker': raised markers are rarely used where there is heavy snow because plows remove them; snowplowable / recessed markers sit in a groove",
+    "Motorcycle Classics, 'Botts' Dots': engineers carve a divot so plows won't disrupt the markers"
+  ],
+  "lines": [
+    { "text": "If you paint a white line on a road, you get a lane.", "caps": "If you paint a white line | on a road, you get a lane." },
+    { "text": "But tires grind regular paint away in a few months.", "caps": "But tires grind regular paint | away in a few months." },
+    { "text": "So, crews melt plastic to about four hundred degrees,", "caps": "So, crews melt plastic | to about 400 degrees," },
+    { "text": "and lay it down hot, so it lasts for years.", "caps": "and lay it down hot, | so it lasts for years." },
+    { "text": "But at night, your headlights hit the line, and it looks gray.", "caps": "But at night, | your headlights hit the line, | and it looks gray." },
+    { "text": "So, while it's still soft, they sprinkle tiny glass beads on top.", "caps": "So, while it's still soft, | they sprinkle tiny | glass beads on top." },
+    { "text": "Each bead catches your headlight and sends it straight back to you.", "caps": "Each bead catches your headlight | and sends it | straight back to you." },
+    { "text": "But in the rain, a thin film of water covers the beads,", "caps": "But in the rain, | a thin film of water | covers the beads," },
+    { "text": "and the line disappears.", "caps": "and the line disappears." },
+    { "text": "So, California started gluing raised reflectors between the lanes,", "caps": "So, California started gluing | raised reflectors | between the lanes," },
+    { "text": "and they stick up above the water.", "caps": "and they stick up | above the water." },
+    { "text": "But up north, snowplows scrape them right off the road.", "caps": "But up north, snowplows | scrape them right off the road." },
+    { "text": "So, they cut a little pocket into the road and tuck the reflector inside.", "caps": "So, they cut a little pocket | into the road | and tuck the reflector inside." },
+    { "text": "You see, every bead is a tiny glass ball that bends light back where it came from.", "caps": "You see, every bead | is a tiny glass ball | that bends light back | where it came from." },
+    { "text": "That's why road lines glow at night, but look like plain paint all day.", "caps": "That's why road lines | glow at night, but look | like plain paint all day.", "gap": 0.3 }
+  ]
+}
