@@ -31,45 +31,57 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 - Convert the slot to UTC (`TZ=America/New_York date -d ... -u +%Y-%m-%dT%H:%M:%SZ`, mind daylight saving time).
   That UTC time is `PUBLISH_AT`.
 
-## 2. Pick the story
+## 2. Pick the topic (NEW FORMAT from 2026-11-21: "how things are built / how they work")
 
-- Read `topics.md`. Never repeat a story, and avoid two stories on the same theme back to back.
-- The story must be **TRUE and set in the UNITED STATES** (American people, towns, companies, laws, history), for a US
-  audience. Funny, clever or "wait, what?": loopholes, backfires, odd laws, genius hacks, weird inventions, bizarre
-  true events. Examples of the KIND only (always check facts first, never assume): a US town that elected an animal as
-  mayor, a US law that backfired, an American company promotion that went wrong, a US inventor's accidental discovery.
-- Use WebSearch: confirm every fact on at least 2 reliable sources (museums, encyclopedias, major outlets, .gov). Use
-  the numbers most sources agree on. List them in `script.json` "sources".
-- Skip: gore, deaths played for laughs, tragedies, currently contested politics, living private individuals, crimes
-  against named private people, anything medical-scary, copyrighted characters or brands as characters.
+The owner's reference channel style: realistic-looking 3D explainers that solve an everyday engineering puzzle as a
+chain of problems and fixes. Two shapes, pick one per video:
+- **A. "If you…" chain (45-58 s, the main one).** Line 1: "If you <do a simple thing>, you get <result>." Then repeat:
+  "But <problem>." → "So, <the real-world fix>." 4-6 rounds, each fix a TRUE engineering detail. End with
+  "You see, <the hidden science in one sentence>." + "That's why <something viewers see every day>."
+  Example (already made, do not repeat): `reference/road-lines/script.json` (painted road lines → thermoplastic →
+  glass beads → rain → raised reflectors → snowplows → recessed pockets).
+- **B. "This <machine> just <did something amazing>" (25-35 s).** Line 1 states the wow moment, then 4-6 lines of how
+  it works, then one surprising number to finish.
+- Topics: things American viewers see or use: highways, bridges, dams, skyscrapers, airports, planes, trains,
+  stadiums, farms, grain silos, ski resorts, theme parks, fire trucks, garbage trucks, ships and ports, national
+  parks, gas stations, drive-thrus, etc. Set it in the USA when there is a place in the story.
+- Read `topics.md`. Never repeat a topic, and avoid two topics on the same theme back to back.
+- Use WebSearch: confirm every engineering fact and number on at least 2 reliable sources (DOT / .gov manuals,
+  manufacturers, encyclopedias, major outlets). List them in `script.json` "sources". Write ORIGINAL scripts: never copy
+  another creator's lines or their exact sequence of steps.
+- Skip: gore, accidents played for drama, tragedies, politics, living private individuals, brands as characters.
 
-## 3. Make the video (Tall Tale 3D style)
+## 3. Make the video (Deep Dive 3D engine, reference-style captions)
 
-1. `bash <skill>/scripts/new_video.sh tall-tale <slug>`.
-2. Write `script.json`: 40-55 s narration (~130-165 words), voice `am_michael` speed 1.05, music `bounce`. Shape: open on
-   the most surprising fact, then "See, ..." rewind, step-by-step, punchline that flips the start. One line = one cut.
-   Write numbers as spoken; use `caps` to show digits ("20,000"). Check caps chunks: when a chunk's first word is a
-   number written differently from the spoken word, the next chunk must start on a word that IS spoken, or the caption
-   will lag (see `reference/hanoi-rats/script.json`).
-3. `voice.py`, then `words.py`.
-4. Write `src/shots.js` (and new kit pieces in `src/core/`) for THIS story. Study `reference/hanoi-rats/` (shots.js,
-   rats.js): it is a full working example (overlays: REW badge, paper notice card, stamp, counter, "?" pop).
+1. `bash <skill>/scripts/new_video.sh deep-dive <slug>`; read `<skill>/styles/deep-dive/STYLE.md`.
+2. Copy the caption look from `reference/road-lines/captions.js` into `src/core/captions.js` (plain white sentence-case
+   text, soft shadow, up to 2 lines, y 1300, NO yellow word, NO pop). In `script.json` give every line `caps` chunks of
+   3-6 words split with `|`, e.g. `"If you paint a white line | on a road, you get a lane."`.
+3. `script.json`: voice `am_michael`, speed 1.0, music `bed`, gap 0.16. ~140-165 words for shape A, ~80 for shape B.
+   Then `voice.py`, then `words.py`. Numbers as spoken in `text`, digits in `caps`.
+4. Build the world in `src/core/<topic>.js` and the shots in `src/shots.js`, one shot per line (two for a long line),
+   cut with `cut(i)`, key moments on `Wd('word', i)`. Start from `reference/road-lines/road.js` + `shots.js`
+   (highway with day/dusk/night/snow modes, rain, car, trucks, worker in hi-vis, macro scene). People are `Human`
+   from `core/human.js` (posable). Keep looks realistic and calm: daylight, real-world colors, soft shadows, small
+   dark info pills only for one key number per shot.
    Lessons learned:
-   - **The frame is vertical and very narrow.** Horizontal half-width visible ≈ 0.18 × distance at fov 36, ≈ 0.23 ×
-     distance at fov 44, ≈ 0.26 × distance at fov 50. Put every subject of a shot near the camera's line of sight
-     (arrange people in depth, not side by side). Check each shot in the sheet; anything off-frame is a bug.
-   - Interiors: keep the camera inside the walls (interior w = width, x within ±w/2, z < 2).
-   - New sound effect names must be added to BOTH `FX` and `LEVEL` in `tools/mix.py` (see reference mix.py `rewind`).
-   - Valid cues: whoosh slide pop plop gulp boing bubbles sizzle sparkle thud slam tock zip alarm inhale heartbeat ding
-     chirp chug stamp (+ rewind if you copy it).
-   - Keep key subjects out of the caption band (y 1250-1550 of 1920).
-5. In the project, with `SOFTWARE_GL=1 QS='&res=0.6&aa=0&shadow=1024'`: `node tools/capture.mjs check` (CHECK OK),
-   `cues`, `<skill>/scripts/py tools/mix.py .`, then `sheet review/all.jpg 1 9` and LOOK at it. Fix every framing,
-   timing and caption problem; re-render the sheet until it is clean. Look at 3-4 key frames full size too.
-6. Final render (~35 min): run in the background
+   - **The frame is vertical and very narrow.** Visible horizontal half-width ≈ 0.18 × distance at fov 36, 0.21 at
+     fov 40, 0.23 at fov 45, 0.26 at fov 50. Keep every subject near the camera's line of sight. Macro shots: keep the
+     camera ~2-3 m from a ~0.5 m subject at fov 45, or the frame fills with one blown-out surface.
+   - Macro/close scenes: low `environmentIntensity` (~0.1), modest spotlights (~25), bloom ≤ 0.4 with threshold ≥ 0.8.
+   - Night: bloom ~0.55, threshold ~0.7; emissive lines ≤ ~1.0, or the whole frame glows.
+   - Valid cues: whoosh slide pop plop gulp boing bubbles sizzle sparkle thud slam tock zip alarm inhale heartbeat.
+     Any other name crashes `mix.py` unless you add it to BOTH `FX` and `LEVEL`.
+   - Keep key subjects out of the caption band (y 1230-1380).
+5. With `SOFTWARE_GL=1 QS='&res=0.5&aa=0&shadow=1024'`: `node tools/capture.mjs check` (CHECK OK), `cues`,
+   `<skill>/scripts/py tools/mix.py .`, then `sheet review/all.jpg 1.5 8` and LOOK at it. Fix every washed-out, empty,
+   off-frame or mistimed shot; re-check those times with `frames review/g "t1,t2,..."`.
+6. Final render (~45-50 min): in the background
    `SOFTWARE_GL=1 QS='&res=0.7&aa=0&shadow=1024' FPS=24 node tools/capture.mjs video renders/final.mp4 > /tmp/render.log 2>&1`
    and poll it with foreground `sleep 540` checks until the log prints the output path. Never end the turn while it runs.
 7. Check the MP4: ffprobe shows 1080x1920, duration ≤ 59 s, audio present; grab 9 frames into one strip and look.
+8. To save usage: do not re-read big files you already have, keep sheets at 1.5 s steps, and look only at frames you
+   changed.
 
 ## 4. Upload
 
@@ -79,7 +91,7 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
    `part=snippet, mine=true` with the connection_id above. The id MUST be `UCEbKzlOb63pBdElUTl9wRvg`; otherwise STOP.
 3. Upload: Zapier `youtube_upload_video` (selected_api `YouTubeV4CLIAPI`, action `upload_video`) with the connection_id,
    params: `video` = raw URL, `title` (≤ 60 chars, curiosity hook, 1 emoji max, no clickbait lies), `description`
-   (2-3 sentence story teaser, "This is a true story.", Sources line, subscribe line with @WaitThatReallyHappenedUS,
+   (2-3 sentence teaser of the puzzle and its fix, Sources line, subscribe line with @WaitThatReallyHappenedUS,
    then `#shorts` + 4-6 hashtags), `tags` (8-12), `category_id` "27", `privacy_status` "private",
    `publish_at` = PUBLISH_AT (ISO UTC, e.g. 2026-11-22T13:00:00Z), `made_for_kids` "false",
    `embeddable` "true", `notify_subscribers` "true", `default_language` "en", `default_audio_language` "en",
