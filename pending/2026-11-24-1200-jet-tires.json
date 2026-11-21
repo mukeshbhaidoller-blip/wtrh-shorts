@@ -1,5 +1,5 @@
 {
- "status": "NOT UPLOADED - YouTube upload via Zapier throttled 4x on 2026-11-21 ~18:20-18:40 UTC (5 uploads already that day; likely YouTube API daily quota). Video is fine (QA passed). | Retry 2026-11-21 19:40 UTC (scheduled run): channel verified OK, upload_video throttled again (quota not reset yet; resets midnight Pacific = 08:00 UTC). Still pending.",
+ "status": "NOT UPLOADED - YouTube upload via Zapier throttled 4x on 2026-11-21 ~18:20-18:40 UTC (5 uploads already that day; likely YouTube API daily quota). Video is fine (QA passed). | Retry 2026-11-21 19:40 UTC (scheduled run): channel verified OK, upload_video throttled again (quota not reset yet; resets midnight Pacific = 08:00 UTC). Still pending. | Retry 2026-11-21 21:56 UTC (scheduled run): channel verified OK, upload_video (slot tried 2026-11-21 19:00 ET) throttled again. Still pending; next quota reset 2026-11-22 08:00 UTC.",
  "video_branch": "pending-2026-11-24-1200-jet-tires (video.mp4)",
  "video_on_pc": "D:\\Ai Video Edit\\jobs\\2026-11-24-1200-jet-tires\\final.mp4 (share.mp4 for Telegram)",
  "planned_slot_et": "2026-11-24 12:00 ET (publish_at 2026-11-24T17:00:00Z)",
