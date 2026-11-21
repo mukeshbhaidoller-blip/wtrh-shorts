@@ -6,6 +6,12 @@ $log = Join-Path $jobs 'watcher-log.txt'
 $mutex = New-Object System.Threading.Mutex($false, 'Local\ClaudeRenderWatcher')
 if (-not $mutex.WaitOne(0)) { exit }
 Add-Content $log "$(Get-Date -Format o) watcher started (pid $PID)"
+# after a PC restart nothing can still be running: re-queue jobs that were cut off (no done.txt)
+Get-ChildItem $jobs -Directory | ForEach-Object {
+  if ((Test-Path "$($_.FullName)\running.txt") -and -not (Test-Path "$($_.FullName)\done.txt")) {
+    Remove-Item "$($_.FullName)\running.txt" -Force; Add-Content $log "$(Get-Date -Format o) RESUME $($_.Name) (was cut off)"
+  }
+}
 while ($true) {
   try {
     Set-Content (Join-Path $jobs 'heartbeat.txt') (Get-Date -Format o)
