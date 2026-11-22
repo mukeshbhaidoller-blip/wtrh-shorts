@@ -43,7 +43,7 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 If `pending/*.json` exists (a finished video whose upload failed, e.g. Zapier "throttled" = YouTube's daily upload
 quota, which resets at midnight Pacific = 13:30 IST), handle the oldest one BEFORE making a new video: its MP4 is on the
 git branch named in the file (and on the PC). Give it the earliest free slot (section 1b, must be >= 2 h ahead), upload
-it exactly like section 4 (same metadata), send it to Telegram (4b), log it in topics.md (replace its NOT UPLOADED line),
+it exactly like section 4 (use that branch's raw URL) (same metadata), send it to Telegram (4b), log it in topics.md (replace its NOT UPLOADED line),
 delete the pending json, push. If the upload is throttled again, stop the run (don't make a new video), report it.
 Then continue with a new video only if this run still has time.
 
@@ -142,28 +142,47 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
    render, so the whole video is rendered again; ~25-50 min).
 8. Usage: don't re-read big files, keep sheets small, look only at changed frames.
 
-## 4. Upload
+## 4. Upload — FREE, through YouTube Studio in the PC's built-in browser (since 2026-11-22)
 
-1. Copy the staged `final.mp4` to `video.mp4`, `git checkout --orphan upload-tmp`, remove everything from the index, add only `video.mp4`, commit,
-   `git push -f origin upload-tmp:upload`. Then `curl -sSI` the raw URL: must be HTTP 200 and the right content-length.
-2. Verify the channel: Zapier YouTube `youtube_make_api_get_request` GET `https://www.googleapis.com/youtube/v3/channels`
-   `part=snippet, mine=true` with the connection_id above. The id MUST be `UCEbKzlOb63pBdElUTl9wRvg`; otherwise STOP.
-3. Upload: Zapier `youtube_upload_video` (selected_api `YouTubeV4CLIAPI`, action `upload_video`) with the connection_id,
-   params: `video` = raw URL, `title` (≤ 60 chars, curiosity hook, 1 emoji max, no clickbait lies), `description`
-   (2-3 sentence teaser of the puzzle and its fix, Sources line, subscribe line with @WaitThatReallyHappenedUS,
-   then `#shorts` + 4-6 hashtags), `tags` (8-12), `category_id` "27", `privacy_status` "private",
-   `publish_at` = PUBLISH_AT (ISO UTC, e.g. 2026-11-22T13:00:00Z), `made_for_kids` "false",
-   `embeddable` "true", `notify_subscribers` "true", `default_language` "en", `default_audio_language` "en",
-   `license` "youtube". (YouTube makes a private video with publishAt go public by itself at that time.)
-   - If Zapier rejects `publish_at`: upload with `privacy_status` "private" and no publish_at, then call
-     `youtube_make_api_mutating_request` PUT `https://www.googleapis.com/youtube/v3/videos?part=status` with body
-     `{"id":"<id>","status":{"privacyStatus":"private","publishAt":"<PUBLISH_AT>","selfDeclaredMadeForKids":false}}`.
-   - If that also fails, set the video public with the same PUT (`"privacyStatus":"public"`, no publishAt) and say so
-     in the report.
-4. Check with GET `videos?part=status,processingDetails&id=<id>` that `status.publishAt` equals PUBLISH_AT (or that it
-   is public, in the fallback case) and that the upload was not rejected.
-5. Append one line to `topics.md` on `main`:
-   `- <slot, e.g. 2026-11-22 13:00 ET> · <title> · https://youtu.be/<id> · <one-line topic> · <main source>`,
+Zapier's trial ends 2026-12-03 and the owner can't pay, and an own Google API project would lock every upload to
+private. So upload exactly like a person would, in YouTube Studio inside the Claude desktop app's built-in browser on
+the owner's PC (already signed in to the owner's Google account; studio.youtube.com is allowed for the browser pane
+permanently). Proven on 2026-11-22 with the jet-tires Short (https://youtube.com/shorts/nXDqd75z3fM).
+
+1. Host the MP4: copy the staged `final.mp4` to `video.mp4`, `git checkout --orphan upload-tmp`, remove everything from
+   the index, add only `video.mp4`, commit, `git push -f origin upload-tmp:upload`, `curl -sSI` the raw URL
+   `https://raw.githubusercontent.com/mukeshbhaidoller-blip/wtrh-shorts/upload/video.mp4` (200, right size).
+2. Load the browser tools (ToolSearch `mcp__remote-devices__Claude_Browser__`, max 30). `preview_start`
+   `https://studio.youtube.com/channel/UCEbKzlOb63pBdElUTl9wRvg/videos/upload`. With `javascript_tool` check
+   `ytcfg.get('CHANNEL_ID') === 'UCEbKzlOb63pBdElUTl9wRvg'` and that the page text contains "Wait, That Really Happened".
+   If not: STOP, upload nothing.
+3. `find` "Upload videos" → click it (ref). Then `javascript_tool`:
+   ```js
+   await new Promise(r=>setTimeout(r,2000));
+   const inp = document.querySelector('ytcp-uploads-file-picker input[type=file]');
+   const b = await (await fetch('<raw URL>?v=' + Date.now())).blob();
+   const dt = new DataTransfer(); dt.items.add(new File([b], '<title>.mp4', {type: 'video/mp4'}));
+   inp.files = dt.files; inp.dispatchEvent(new Event('change', {bubbles: true})); b.size
+   ```
+   (Only ONE upload: never run this twice. The details form appears after a few seconds; `read_page` filter
+   interactive shows it.)
+4. Details: title textbox ("Add a title that describes your video") → click, `ctrl+a`, type the title (≤ 60 chars,
+   curiosity hook, 1 emoji max). Description textbox ("Tell viewers about your video") → click, `ctrl+a`, type it
+   (2-3 sentence teaser, Sources line, subscribe line with @WaitThatReallyHappenedUS, `#shorts` + 4-6 hashtags).
+   `find` "not made for kids" → `scroll_to` it, take a screenshot and click the radio CIRCLE by coordinate (a ref click
+   on the label did not select it), then `zoom` to confirm it is filled. Click "Show more" → Tags textbox → type the
+   8-12 tags joined by commas, ending with a comma. Category should already say Education (fix it if not).
+5. Click **Next** (bottom right) 3 times (wait 2 s between) → Visibility. `find` "Schedule" → click the "Schedule"
+   header. Time zone must be "(GMT+0530) Local Time" (IST). Convert the slot to IST (12:00 ET = 22:30 IST and
+   19:00 ET = 05:30 IST the next day while US is on EST). Click the date box and click the day in the calendar; click
+   the time box, `find` the option "HH:MM" (15-minute steps) and click it. Zoom/screenshot to confirm date + time.
+6. Click the **Schedule** button (bottom right). Wait 5 s; `javascript_tool`: the page text must contain
+   "Video scheduled" and a `youtube.com/shorts/<id>` link — that id is the video id. Close the dialog.
+7. If the built-in browser is unreachable or Studio fails twice: fall back to Zapier (`youtube_upload_video`,
+   connection_id 02322a7b-7e7d-8a1a-9aad-6c9bc6a79dc3, privacy private + publish_at) only while the Zapier trial still
+   works; otherwise save the video as pending (section 1a) and report.
+8. Append one line to `topics.md` on `main`:
+   `- <slot, e.g. 2026-11-22 13:00 ET> · <title> · https://youtube.com/shorts/<id> · <one-line topic> · <main source>`,
    then `git pull --rebase` and push `main` (retry once if another run pushed first).
 
 ## 4b. Send the same video to the owner's Telegram (right after it is scheduled)
