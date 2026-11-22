@@ -78,9 +78,16 @@ def draw_caps(caps, outdir):
         Image.alpha_composite(sh, im).save(f'{outdir}/c{k:02d}.png', optimize=True)
 
 
-def job(proj, shots, name, out, samples):
+def job(proj, shots, name, out, samples, meta_path=None):
     S, L, W = load(proj)
     os.makedirs(out, exist_ok=True)
+    if meta_path:
+        m = json.load(open(meta_path, encoding='utf-8'))
+        for k in ('title', 'description', 'tags', 'date', 'time'):
+            if k not in m: raise SystemExit(f'meta needs {k}')
+        jd = f'D:\\Ai Video Edit\\jobs\\{name}'
+        m.update(video=f'{jd}\\final.mp4', telegram_file=f'{jd}\\share.mp4', channel='UCEbKzlOb63pBdElUTl9wRvg')
+        json.dump(m, open(f'{out}/meta.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     shutil.copy(f'{HERE}/kit.py', f'{out}/kit.py'); shutil.copy(f'{HERE}/character.py', f'{out}/character.py'); shutil.copy(shots, f'{out}/shots.py')
     shutil.copy(f'{proj}/data/lines.json', f'{out}/timing.json'); shutil.copy(f'{proj}/data/mix.wav', f'{out}/mix.wav')
     caps = caption_list(S, L, W); draw_caps(caps, f'{out}/caps')
@@ -102,6 +109,7 @@ echo === BLENDER END %TIME% === >> "job-log.txt"
 if exist share.mp4 (echo RENDER_OK > result.txt) else (echo RENDER_FAILED > result.txt)
 rem keep the D: drive clean: drop this job's frames once the video exists, and job folders older than 10 days
 if exist share.mp4 rd /s /q frames
+if exist share.mp4 if exist meta.json node "D:\\Ai Video Edit\\_claude\\uploader\\upload.mjs" "%~dp0meta.json" > upload-log.txt 2>&1
 forfiles /p "D:\\Ai Video Edit\\jobs" /d -10 /c "cmd /c if @isdir==TRUE rd /s /q @path" > nul 2>&1
 echo === JOB END %TIME% === >> "job-log.txt"
 '''
@@ -143,9 +151,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "D:\\Ai Video Edit\\_claude\
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('cmd', choices=['cues', 'job', 'tg', 'stills'])
     ap.add_argument('--proj'); ap.add_argument('--shots'); ap.add_argument('--name'); ap.add_argument('--out')
-    ap.add_argument('--samples', type=int, default=48); ap.add_argument('--sel', default=''); ap.add_argument('--render-job'); ap.add_argument('--caption')
+    ap.add_argument('--samples', type=int, default=48); ap.add_argument('--sel', default=''); ap.add_argument('--meta'); ap.add_argument('--render-job'); ap.add_argument('--caption')
     a = ap.parse_args()
     if a.cmd == 'cues': cues(a.proj)
-    elif a.cmd == 'job': job(a.proj, a.shots, a.name, a.out, a.samples)
+    elif a.cmd == 'job': job(a.proj, a.shots, a.name, a.out, a.samples, a.meta)
     elif a.cmd == 'stills': stills_job(a.proj, a.shots, a.name, a.out, a.sel)
     else: tg_job(a.name, a.render_job, a.caption, a.out)

@@ -38,14 +38,18 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
    Diffuse/nor_gl/Rough jpgs, HDRIs as `<id>.hdr`; `device_list_dir` it to see what is there); helper scripts in `_claude\`;
    jobs in `jobs\<name>\`. GPU: RTX 5060 8 GB (OptiX), Cycles ≈ 1.1-2.5 s per 1080x1920 frame at 48 samples.
 
-## 1a. Pending uploads first
+## 1a. Check the earlier auto-uploads first (cheap)
 
-If `pending/*.json` exists (a finished video whose upload failed, e.g. Zapier "throttled" = YouTube's daily upload
-quota, which resets at midnight Pacific = 13:30 IST), handle the oldest one BEFORE making a new video: its MP4 is on the
-git branch named in the file (and on the PC). Give it the earliest free slot (section 1b, must be >= 2 h ahead), upload
-it exactly like section 4 (use that branch's raw URL) (same metadata), send it to Telegram (4b), log it in topics.md (replace its NOT UPLOADED line),
-delete the pending json, push. If the upload is throttled again, stop the run (don't make a new video), report it.
-Then continue with a new video only if this run still has time.
+The PC uploads and sends to Telegram BY ITSELF after each render (section 4), so earlier runs log their video in
+`topics.md` as `PENDING-PC <job>`. For each such line: stage `D:\Ai Video Edit\jobs\<job>\upload-result.json`.
+- `"ok": true` → replace PENDING-PC in that line with its `url`, push.
+- `"ok": false` (or `result.txt` says RENDER_FAILED) → read `error` / `job-log.txt`. If `final.mp4` exists, give it the
+  earliest free slot (1b), edit `date`/`time` in that job's `meta.json` (commit a new copy), and run a small job whose
+  `job.bat` is just `node "D:\Ai Video Edit\_claude\uploader\upload.mjs" "D:\Ai Video Edit\jobs\<job>\meta.json" > upload-log2.txt 2>&1`.
+  If the video itself is missing/bad, mark the line `FAILED` and move on. `NOT_LOGGED_IN` → report that the owner must
+  run `D:\Ai Video Edit\_claude\uploader\login.bat` once; still make today's video.
+- no result file yet → the PC is still rendering/uploading; leave it.
+Older lines marked `NOT UPLOADED` with a `pending/*.json`: same idea (their MP4 is on the git branch named there).
 
 ## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
 
@@ -130,71 +134,40 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
    = public domain .glb; check the license of anything else; CC0/public domain only) can be downloaded here and committed
    to `D:\Ai Video Edit\assets\models\`; load with `import_model('models/x.glb', ...)`.
 5. Job mechanics (the PC helper runs any `D:\Ai Video Edit\jobs\<name>\job.bat` once a `ready.txt` exists, then writes
-   `done.txt`): `python3 blender/build_job.py job --proj <proj> --shots <proj>/shots.py --name <job> --out /mnt/user-data/outputs/jobs/<job>`
+   `done.txt`). First write `<proj>/meta.json` (UTF-8):
+   `{"title": "...", "description": "...", "tags": [...], "date": "<D Mon YYYY in IST, e.g. 25 Nov 2026>", "time": "<HH:MM IST, 15-min step>", "telegram_caption": "<title>\nYouTube par publish: <IST> IST (<ET> ET)"}`
+   (title ≤ 60 chars, curiosity hook, max 1 emoji; description = 2-3 sentence teaser, Sources line, subscribe line with
+   @WaitThatReallyHappenedUS, then `#shorts` + 4-6 hashtags; 8-12 tags; IST from the slot: 12:00 ET = 22:30 IST the same
+   day, 19:00 ET = 05:30 IST the next day, while the US is on EST). Then
+   `python3 blender/build_job.py job --proj <proj> --shots <proj>/shots.py --name <job> --out /mnt/user-data/outputs/jobs/<job> --meta <proj>/meta.json`
    (job name e.g. `2026-11-23-1200-<slug>`). It prints the JSON file list: `device_commit_files` it (≤ 40 files per call is
    fine), check sizes with `device_list_dir`, then commit `ready.txt` LAST (any small file). Staged files must live under
    `/mnt/user-data/outputs`. If a commit seems to write an old version, copy the file to a NEW name and commit that.
-6. Wait: poll `device_list_dir D:\Ai Video Edit\jobs\<job>` with foreground `sleep 540` between checks until `done.txt`
-   exists (≈ 25-50 min). Never end the turn while it runs. `job-log.txt` there shows progress; `result.txt` says
-   `RENDER_OK`. If it failed: read `job-log.txt`, fix, make a new job name, run again (once).
-7. QA: `device_stage_files` `jobs\<job>\final.mp4`, ffprobe it (1080x1920, ≤ 59 s, audio), make a contact sheet every
-   2 s and LOOK. One bad shot: fix it, re-test it, and send a NEW job with a new name (the job deletes its frames after a good
-   render, so the whole video is rendered again; ~25-50 min).
-8. Usage: don't re-read big files, keep sheets small, look only at changed frames.
+6. **Do NOT wait for the render** (that waiting used most of the owner's usage). The PC renders (25-50 min), then by
+   itself uploads to YouTube Studio with the schedule (section 4) and sends the video + link to the owner's Telegram.
+   Right after `ready.txt` is committed, append to `topics.md` on main:
+   `- <slot ET> · <title> · PENDING-PC <job> · <one-line topic> · <main source>`, pull --rebase, push, report, END.
+   The next run checks the result (1a).
+7. So the quality gate is BEFORE the job: the cloud test stills (step 3) and, for shots with people, the PC stills job
+   (2b) must look right. Only send a job you would be happy to see published.
+8. Usage: don't re-read big files, keep sheets small, look only at changed frames, never poll a render.
 
-## 4. Upload — FREE, through YouTube Studio in the PC's built-in browser (since 2026-11-22)
+## 4. Upload — FREE and automatic, done by the PC itself (since 2026-11-22)
 
-Zapier's trial ends 2026-12-03 and the owner can't pay, and an own Google API project would lock every upload to
-private. So upload exactly like a person would, in YouTube Studio inside the Claude desktop app's built-in browser on
-the owner's PC (already signed in to the owner's Google account; studio.youtube.com is allowed for the browser pane
-permanently). Proven on 2026-11-22 with the jet-tires Short (https://youtube.com/shorts/nXDqd75z3fM).
+No Zapier (trial ends 2026-12-03, owner can't pay) and no own Google API project (that would lock uploads to private).
+`D:\Ai Video Edit\_claude\uploader\upload.mjs` (Playwright + the PC's Chrome, own profile `_claude\yt-profile`, signed in
+by the owner once with `login.bat`) opens YouTube Studio for channel UCEbKzlOb63pBdElUTl9wRvg (it checks the channel id
+and stops if different), uploads `final.mp4`, fills title/description/not-made-for-kids/tags, schedules at
+meta `date` + `time` (IST, Studio's local time zone), confirms ("will be set to public on ..."), writes
+`upload-result.json` {ok, id, url, telegram} and sends `share.mp4` + caption + link to the owner's Telegram. On failure it
+sends a Telegram text "UPLOAD FAILED ...". The render job's `job.bat` calls it automatically when `meta.json` is in the
+job folder. Step screenshots: `jobs\<job>\upload-shots\`. Proven 2026-11-22 (road-lines, xoWM3B7zIRo).
 
-1. Host the MP4: copy the staged `final.mp4` to `video.mp4`, `git checkout --orphan upload-tmp`, remove everything from
-   the index, add only `video.mp4`, commit, `git push -f origin upload-tmp:upload`, `curl -sSI` the raw URL
-   `https://raw.githubusercontent.com/mukeshbhaidoller-blip/wtrh-shorts/upload/video.mp4` (200, right size).
-2. Load the browser tools (ToolSearch `mcp__remote-devices__Claude_Browser__`, max 30). `preview_start`
-   `https://studio.youtube.com/channel/UCEbKzlOb63pBdElUTl9wRvg/videos/upload`. With `javascript_tool` check
-   `ytcfg.get('CHANNEL_ID') === 'UCEbKzlOb63pBdElUTl9wRvg'` and that the page text contains "Wait, That Really Happened".
-   If not: STOP, upload nothing.
-3. `find` "Upload videos" → click it (ref). Then `javascript_tool`:
-   ```js
-   await new Promise(r=>setTimeout(r,2000));
-   const inp = document.querySelector('ytcp-uploads-file-picker input[type=file]');
-   const b = await (await fetch('<raw URL>?v=' + Date.now())).blob();
-   const dt = new DataTransfer(); dt.items.add(new File([b], '<title>.mp4', {type: 'video/mp4'}));
-   inp.files = dt.files; inp.dispatchEvent(new Event('change', {bubbles: true})); b.size
-   ```
-   (Only ONE upload: never run this twice. The details form appears after a few seconds; `read_page` filter
-   interactive shows it.)
-4. Details: title textbox ("Add a title that describes your video") → click, `ctrl+a`, type the title (≤ 60 chars,
-   curiosity hook, 1 emoji max). Description textbox ("Tell viewers about your video") → click, `ctrl+a`, type it
-   (2-3 sentence teaser, Sources line, subscribe line with @WaitThatReallyHappenedUS, `#shorts` + 4-6 hashtags).
-   `find` "not made for kids" → `scroll_to` it, take a screenshot and click the radio CIRCLE by coordinate (a ref click
-   on the label did not select it), then `zoom` to confirm it is filled. Click "Show more" → Tags textbox → type the
-   8-12 tags joined by commas, ending with a comma. Category should already say Education (fix it if not).
-5. Click **Next** (bottom right) 3 times (wait 2 s between) → Visibility. `find` "Schedule" → click the "Schedule"
-   header. Time zone must be "(GMT+0530) Local Time" (IST). Convert the slot to IST (12:00 ET = 22:30 IST and
-   19:00 ET = 05:30 IST the next day while US is on EST). Click the date box and click the day in the calendar; click
-   the time box, `find` the option "HH:MM" (15-minute steps) and click it. Zoom/screenshot to confirm date + time.
-6. Click the **Schedule** button (bottom right). Wait 5 s; `javascript_tool`: the page text must contain
-   "Video scheduled" and a `youtube.com/shorts/<id>` link — that id is the video id. Close the dialog.
-7. If the built-in browser is unreachable or Studio fails twice: fall back to Zapier (`youtube_upload_video`,
-   connection_id 02322a7b-7e7d-8a1a-9aad-6c9bc6a79dc3, privacy private + publish_at) only while the Zapier trial still
-   works; otherwise save the video as pending (section 1a) and report.
-8. Append one line to `topics.md` on `main`:
-   `- <slot, e.g. 2026-11-22 13:00 ET> · <title> · https://youtube.com/shorts/<id> · <one-line topic> · <main source>`,
-   then `git pull --rebase` and push `main` (retry once if another run pushed first).
-
-## 4b. Send the same video to the owner's Telegram (right after it is scheduled)
-
-1. Only after step 4 confirmed the schedule. Check `D:\Ai Video Edit\_claude\telegram-ok.txt` exists (owner ran
-   telegram-setup once). If it doesn't, skip this and say so in the report.
-2. `python3 blender/build_job.py tg --name <job>-tg --render-job <job> --out /mnt/user-data/outputs/jobs/<job>-tg --caption "<text>"`
-   with caption (≤ 1000 chars): the title, then "YouTube par publish: <IST time> IST (<ET time> ET)", then
-   `https://youtu.be/<id>`. Commit the two printed files, then `ready.txt` last. Wait ~1-2 min for `done.txt`; stage
-   `result.txt`: it must say `TELEGRAM OK` (it never contains the token). If it failed, mention it in the report.
+Fallbacks, only if the PC uploader keeps failing: YouTube Studio through the built-in browser by hand (studio.youtube.com
+is allowed; file via `ytcp-uploads-file-picker input[type=file]` + fetched raw URL), or Zapier while its trial lasts.
 
 ## 5. Report
 
-End with a short message in Hindi written in Roman letters: the title, the link, the scheduled publish time in India
-time (IST) and US Eastern time, whether Telegram got it, and anything that went wrong.
+End with a short message in Hindi written in Roman letters: the title, the planned publish time in IST and US Eastern
+time, that the PC will upload it and send it on Telegram by itself after the render (~25-50 min), what 1a found about
+earlier videos, and anything that went wrong.
