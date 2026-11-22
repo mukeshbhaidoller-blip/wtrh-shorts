@@ -41,7 +41,9 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
 ## 1a. Check the earlier auto-uploads first (cheap)
 
 The PC uploads and sends to Telegram BY ITSELF after each render (section 4), so earlier runs log their video in
-`topics.md` as `PENDING-PC <job>`. For each such line: stage `D:\Ai Video Edit\jobs\<job>\upload-result.json`.
+`topics.md` as `PENDING-PC <job>`. For each such line: stage `D:\Ai Video Edit\jobs\_uploaded\<job>.json` (the PC writes it
+after a good upload + Telegram and then DELETES the whole job folder to save disk space, owner's wish); if there is no
+such record, stage `D:\Ai Video Edit\jobs\<job>\upload-result.json`.
 - `"ok": true` → replace PENDING-PC in that line with its `url`, push.
 - `"ok": false` (or `result.txt` says RENDER_FAILED) → read `error` / `job-log.txt`. If `final.mp4` exists, give it the
   earliest free slot (1b), edit `date`/`time` in that job's `meta.json` (commit a new copy), and run a small job whose
@@ -161,7 +163,9 @@ and stops if different), uploads `final.mp4`, fills title/description/not-made-f
 meta `date` + `time` (IST, Studio's local time zone), confirms ("will be set to public on ..."), writes
 `upload-result.json` {ok, id, url, telegram} and sends `share.mp4` + caption + link to the owner's Telegram. On failure it
 sends a Telegram text "UPLOAD FAILED ...". The render job's `job.bat` calls it automatically when `meta.json` is in the
-job folder. Step screenshots: `jobs\<job>\upload-shots\`. Proven 2026-11-22 (road-lines, xoWM3B7zIRo).
+job folder. Step screenshots: `jobs\<job>\upload-shots\`.
+After a good upload AND `TELEGRAM OK` it writes `jobs\_uploaded\<job>.json` and deletes the job folder ~90 s later (the
+video lives on YouTube + Telegram; nothing of it stays on the PC). A failed job keeps its folder for a retry. Proven 2026-11-22 (road-lines, xoWM3B7zIRo).
 
 Fallbacks, only if the PC uploader keeps failing: YouTube Studio through the built-in browser by hand (studio.youtube.com
 is allowed; file via `ytcp-uploads-file-picker input[type=file]` + fetched raw URL), or Zapier while its trial lasts.

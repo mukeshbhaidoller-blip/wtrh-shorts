@@ -8,7 +8,7 @@
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 
 const metaPath = process.argv[2];
 const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8').replace(/^\uFEFF/, ''));
@@ -127,6 +127,18 @@ async function main() {
       } catch (e) { telegram = 'TELEGRAM FAILED ' + String(e.stdout || e.message).slice(0, 200); }
     }
     done({ ok: true, id, url: `https://youtube.com/shorts/${id}`, telegram });
+    // owner's wish: once it is scheduled on YouTube AND delivered on Telegram, free the disk space.
+    // Keep a tiny record in jobs\_uploaded\<job>.json, then delete the whole job folder a minute later
+    // (after the PC helper has finished writing done.txt).
+    try {
+      const rec = path.join(path.dirname(dir), '_uploaded'); fs.mkdirSync(rec, { recursive: true });
+      fs.writeFileSync(path.join(rec, path.basename(dir) + '.json'), JSON.stringify({ ok: true, id, url: `https://youtube.com/shorts/${id}`,
+        title: meta.title, date: meta.date, time: meta.time, telegram, at: new Date().toISOString() }, null, 1));
+      if (/^TELEGRAM OK/.test(telegram) && /\\jobs\\[^\\]+$/i.test(dir)) {
+        spawn('cmd.exe', ['/c', `timeout /t 90 /nobreak > nul & rd /s /q "${dir}"`], { detached: true, stdio: 'ignore', windowsHide: true }).unref();
+        say('job folder will be deleted');
+      }
+    } catch (e) { say('cleanup skipped ' + e.message); }
   } catch (e) {
     say('ERROR ' + e.message); await snap('error');
     done({ ok: false, error: e.message });
