@@ -1,0 +1,33 @@
+{
+  "title": "If You Hang a Box From a Rope...",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.3,
+  "outro": 1.0,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+    "ASME, 'Elisha Graves Otis': in 1854 at the New York Crystal Palace exhibition Otis rode his platform up and had the rope cut; the safety (a wagon spring that engages ratchet teeth on the guide rails when the rope goes slack) stopped it",
+    "Guinness World Records, 'First safety elevator (lift)' / American Heritage, 'All safe, gentlemen, all safe!': the 1854 Crystal Palace demonstration in New York",
+    "HowStuffWorks, 'How Elevators Work: The Cable System': the counterweight weighs about as much as the car filled to about 40 percent of capacity, so the motor only has to overcome the difference",
+    "Wikipedia, 'Counterweight' / TK Elevator Classroom 'Counterweights': counterweight = car weight plus roughly 40-50 percent of rated load",
+    "HowStuffWorks, 'How Elevators Work: Safety Systems' / TK Elevator Classroom 'Governor module' / Otis 'High-rise safety systems': an overspeed governor's flyweights swing out when it spins too fast, the governor rope then trips the safeties, which wedge against the guide rails and stop the car",
+    "HowStuffWorks 'Safety Systems' / Science ABC 'How safe are you in an elevator': cars hang from several steel hoist ropes (often four to eight), so one breaking does not drop the car"
+  ],
+  "lines": [
+    { "text": "If you hang a box from a rope, you get an elevator.", "caps": "If you hang a box | from a rope, | you get an elevator." },
+    { "text": "But if that rope ever snaps, the box falls.", "caps": "But if that rope | ever snaps, | the box falls.", "sfx": [{"at": 1.45, "type": "slam", "gain": 0.4}] },
+    { "text": "So, in eighteen fifty-four, Elisha Otis stood on a platform in New York, and had the rope cut.", "caps": "So, in 1854, Elisha Otis | stood on a platform | in New York, | and had the rope cut." },
+    { "text": "A spring snapped out, caught the teeth on the rails, and he didn't fall.", "caps": "A spring snapped out, | caught the teeth | on the rails, | and he didn't fall.", "sfx": [{"at": 0.35, "type": "thud", "gain": 0.45}] },
+    { "text": "But pulling a heavy car up a tall building takes a huge motor.", "caps": "But pulling a heavy car | up a tall building | takes a huge motor." },
+    { "text": "So, a counterweight rides down while the car goes up,", "caps": "So, a counterweight | rides down | while the car goes up," },
+    { "text": "weighing as much as the car plus about forty percent of its load,", "caps": "weighing as much as the car | plus about 40% | of its load," },
+    { "text": "so the motor only lifts the difference.", "caps": "so the motor | only lifts the difference." },
+    { "text": "But what if the car starts moving way too fast?", "caps": "But what if the car | starts moving | way too fast?", "sfx": [{"at": 0.2, "type": "whoosh", "gain": 0.4}] },
+    { "text": "So, a spinning governor up top keeps watch,", "caps": "So, a spinning governor | up top keeps watch," },
+    { "text": "and if it spins too fast, its weights fly out and trip steel wedges that clamp the rails.", "caps": "and if it spins too fast, | its weights fly out | and trip steel wedges | that clamp the rails.", "sfx": [{"at": 3.18, "type": "slam", "gain": 0.4}] },
+    { "text": "And the car doesn't hang from one rope, but from several.", "caps": "And the car doesn't hang | from one rope, | but from several." },
+    { "text": "You see, the ropes just lift the car. The rails are what catch it.", "caps": "You see, the ropes | just lift the car. | The rails | are what catch it." },
+    { "text": "That's why every elevator you ride runs on two steel rails you never see.", "caps": "That's why every elevator | you ride runs on | two steel rails | you never see.", "gap": 0.3 }
+  ]
+}
