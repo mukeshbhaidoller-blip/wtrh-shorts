@@ -33,7 +33,11 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
    Python are needed; Whisper may fail to download, that is fine).
 4. For test stills: `python3.11 -m venv ~/bvenv && ~/bvenv/bin/pip install bpy==4.5.16` (Blender as a Python module, same
    version as the PC's Blender 4.5.16).
-5. PC layout (all under `D:\Ai Video Edit`): Blender `_tools\blender\blender-4.5.16-windows-x64\blender.exe`; ffmpeg
+5. Disks (2026-11-22): heavy AI things live on the new **E: "AI NVMe 1TB"** (931 GB). `D:\FreeVideo`, `D:\AI-Cache`,
+   `D:\VoiceClone`, `D:\Ai Video Edit\_tools` (Blender) and `D:\Ai Video Edit\engines` are junctions to `E:\...`, so the
+   old paths still work. Anything NEW and big (models, tools, caches, downloads) goes straight to `E:\` (via a job;
+   E: is not a connected folder). `jobs`, `_claude` and `assets` stay real folders on D: (connected folder).
+6. PC layout (all under `D:\Ai Video Edit`): Blender `_tools\blender\blender-4.5.16-windows-x64\blender.exe`; ffmpeg
    `C:\Users\Mukesh\.clip-studio\ffmpeg\bin\ffmpeg.exe`; CC0 textures/HDRIs in `assets\` (one folder per texture with
    Diffuse/nor_gl/Rough jpgs, HDRIs as `<id>.hdr`; `device_list_dir` it to see what is there); helper scripts in `_claude\`;
    jobs in `jobs\<name>\`. GPU: RTX 5060 8 GB (OptiX), Cycles ≈ 1.1-2.5 s per 1080x1920 frame at 48 samples.
