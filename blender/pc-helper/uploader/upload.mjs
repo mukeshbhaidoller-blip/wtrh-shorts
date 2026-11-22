@@ -135,7 +135,9 @@ async function main() {
       fs.writeFileSync(path.join(rec, path.basename(dir) + '.json'), JSON.stringify({ ok: true, id, url: `https://youtube.com/shorts/${id}`,
         title: meta.title, date: meta.date, time: meta.time, telegram, at: new Date().toISOString() }, null, 1));
       if (/^TELEGRAM OK/.test(telegram) && /\\jobs\\[^\\]+$/i.test(dir)) {
-        spawn('cmd.exe', ['/c', `timeout /t 90 /nobreak > nul & rd /s /q "${dir}"`], { detached: true, stdio: 'ignore', windowsHide: true }).unref();
+        fs.writeFileSync(path.join(dir, 'delete-me.txt'), 'uploaded + telegram ok');
+        const ps = `Start-Sleep -Seconds 120; Remove-Item -LiteralPath '${dir.replace(/'/g, "''")}' -Recurse -Force -ErrorAction SilentlyContinue`;
+        spawn('powershell.exe', ['-NoProfile', '-WindowStyle', 'Hidden', '-Command', ps], { detached: true, stdio: 'ignore', windowsHide: true }).unref();
         say('job folder will be deleted');
       }
     } catch (e) { say('cleanup skipped ' + e.message); }
