@@ -182,7 +182,7 @@ video lives on YouTube + Telegram; nothing of it stays on the PC). A failed job 
 `job.bat` runs `D:\Ai Video Edit\_claude\qa\qa.mjs <job>` between the render and the upload:
 1. ffmpeg hard checks: length 10-180 s, black screen > 1.5 s, no sound (mean < -45 dB). Any of these → `qa-block.txt`,
    NO upload, Telegram text "QA BLOCKED ...".
-2. Qwen3-VL-8B (Ollama, `E:\Ollama`, model `qwen3-vl:8b`, `think:false`) looks at one frame per narration line (max 12)
+2. Qwen3-VL-8B (Ollama, `E:\Ollama`, model `qwen3-vl:8b-instruct` (the plain `qwen3-vl:8b` tag is the Thinking one: it ignores think:false and returns nothing, so it was removed)) looks at one frame per narration line (max 12)
    with that line's words, and returns `describe / matches_narration / problems / severity`. Advice only — it never stops
    the upload (an 8B model has false alarms); its one-line summary is added to the Telegram caption and the full report
    is kept in `jobs\_uploaded\<job>-qa.json` for section 1a.

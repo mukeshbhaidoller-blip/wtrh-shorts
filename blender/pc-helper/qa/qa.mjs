@@ -8,7 +8,7 @@
 import fs from 'node:fs'; import { fileURLToPath } from 'node:url'; import path from 'node:path'; import { execFileSync, spawnSync } from 'node:child_process';
 
 const FF = 'C:\\Users\\Mukesh\\.clip-studio\\ffmpeg\\bin\\ffmpeg.exe';
-const OLLAMA = 'E:\\Ollama\\ollama.exe', MODEL = 'qwen3-vl:8b', API = 'http://127.0.0.1:11434';
+const OLLAMA = 'E:\\Ollama\\ollama.exe', API = 'http://127.0.0.1:11434';
 const dir = path.resolve(process.argv[2] || '.'), TEST = process.argv.includes('--test');
 const job = path.basename(dir), video = fs.existsSync(path.join(dir, 'final.mp4')) ? path.join(dir, 'final.mp4') : path.join(dir, 'share.mp4');
 const report = { job, video: path.basename(video), at: new Date().toISOString(), hard: {}, frames: [], ai: 'skipped' };
@@ -31,6 +31,10 @@ log('hard checks', JSON.stringify(report.hard));
 
 // ---------- 2. Qwen3-VL looks at the frames ----------
 async function up() { try { const r = await fetch(API + '/api/version', { signal: AbortSignal.timeout(3000) }); return r.ok; } catch { return false; } }
+// the Instruct model answers directly (the plain qwen3-vl:8b tag is the Thinking one and ignores think:false)
+let MODEL = 'qwen3-vl:8b-instruct';
+async function pickModel() { try { const t = await (await fetch(API + '/api/tags')).json(); const n = (t.models || []).map(m => m.name);
+  MODEL = n.find(x => x.startsWith('qwen3-vl:8b-instruct')) || n.find(x => x.startsWith('qwen3-vl')) || MODEL; } catch {} report.model = MODEL; }
 async function ensureServer() {
   if (await up()) return true;
   if (!fs.existsSync(OLLAMA)) return false;
@@ -41,7 +45,9 @@ async function ensureServer() {
 }
 // The owner's own rules for his channel (plain text, editable in Notepad): D:\\Ai Video Edit\\_claude\\qa\\channel-rules.txt
 const RULES = (() => { try { return fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'channel-rules.txt'), 'utf8').trim().slice(0, 3000); } catch { return ''; } })();
-const PROMPT = (line) => (RULES ? `Rules of this YouTube channel, written by its owner (follow them when you judge):\n${RULES}\n\n` : '') + `You are checking one frame of a realistic 3D animated YouTube Short (how-it-works explainer, rendered in Blender).
+const PLAIN = (line) => BASE(line);
+const PROMPT = (line) => (RULES ? `Rules of this YouTube channel, written by its owner (follow them when you judge):\n${RULES}\n\n` : '') + BASE(line) + (RULES ? ' Also list anything that breaks the channel rules above.' : '');
+const BASE = (line) => `You are checking one frame of a realistic 3D animated YouTube Short (how-it-works explainer, rendered in Blender).
 The narrator says at this moment: "${line}"
 Look carefully and answer ONLY with JSON:
 {"describe": "<one sentence: what is in the picture>",
@@ -51,7 +57,7 @@ Look carefully and answer ONLY with JSON:
 Problems to look for: picture black, blank or almost all one colour; very dark or blown out; a human body that looks broken
 (arms or legs through the body or through objects, twisted joints, missing head or hands, person floating or sunk into the ground);
 objects floating, cutting through each other, or missing textures (bright pink/magenta, checkerboard); caption text cut off,
-overlapping or hard to read; the main subject hard to see. Also list anything that breaks the channel rules above. Do not invent problems: if it looks fine, "problems": [] and "severity": "none".`;
+overlapping or hard to read; the main subject hard to see. Do not invent problems: if it looks fine, "problems": [] and "severity": "none".`;
 
 // Owner's GOOD example pictures (any .jpg/.png in qa\\examples, max 2 used) = the look to aim for
 let EXAMPLES = [];
@@ -63,14 +69,14 @@ function loadExamples(tmp) {
     ff(['-v', 'error', '-y', '-i', path.join(ed, f), '-vf', 'scale=448:-2', '-frames:v', '1', '-q:v', '4', o]);
     if (fs.existsSync(o)) EXAMPLES.push(fs.readFileSync(o).toString('base64')); });
 }
-async function ask(jpg, line, last) {
-  const body = { model: MODEL, stream: false, think: false, format: 'json', keep_alive: last ? 0 : '5m',
-    options: { temperature: 0, num_ctx: 4096 },
-    messages: [{ role: 'user', content: (EXAMPLES.length ? `The first ${EXAMPLES.length} picture(s) are GOOD examples of this channel's look (style reference only). Judge ONLY the LAST picture.\n\n` : '') + PROMPT(line),
-      images: [...EXAMPLES, fs.readFileSync(jpg).toString('base64')] }] };
+async function ask(jpg, line, last, plain = false) {
+  const body = { model: MODEL, stream: false, think: false, keep_alive: last ? 0 : '5m',
+    options: { temperature: 0, num_ctx: 8192, num_predict: 400 },
+    messages: [{ role: 'user', content: plain ? PLAIN(line) : (EXAMPLES.length ? `The first ${EXAMPLES.length} picture(s) are GOOD examples of this channel's look (style reference only). Judge ONLY the LAST picture.\n\n` : '') + PROMPT(line),
+      images: plain ? [fs.readFileSync(jpg).toString('base64')] : [...EXAMPLES, fs.readFileSync(jpg).toString('base64')] }] };
   const r = await fetch(API + '/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(240000) });
   const j = await r.json(); const txt = (j.message && j.message.content) || '';
-  try { return JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}') + 1)); } catch { return { describe: txt.slice(0, 200), problems: [], severity: 'unknown' }; }
+  try { return JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}') + 1)); } catch { return { describe: txt.slice(0, 200), problems: [], severity: 'unknown', raw: `len=${txt.length} done=${j.done_reason || ''} eval=${j.eval_count || ''} prompt=${j.prompt_eval_count || ''} think=${((j.message || {}).thinking || '').length} err=${j.error || ''}` }; }
 }
 
 async function aiCheck() {
@@ -80,6 +86,7 @@ async function aiCheck() {
   // one frame per line (max 12, evenly picked), at 60% of the line so the cut has happened
   const pick = lines.length <= 12 ? lines : Array.from({ length: 12 }, (_, i) => lines[Math.round(i * (lines.length - 1) / 11)]);
   if (!(await ensureServer())) return 'ollama not running';
+  await pickModel(); log('model', MODEL);
   const fdir = path.join(dir, 'qa-frames'); fs.mkdirSync(fdir, { recursive: true }); loadExamples(fdir);
   const t0 = Date.now();
   for (let k = 0; k < pick.length; k++) {
@@ -88,12 +95,14 @@ async function aiCheck() {
     ff(['-v', 'error', '-y', '-ss', t.toFixed(2), '-i', video, '-frames:v', '1', '-vf', 'scale=576:-2', '-q:v', '3', jpg]);
     if (!fs.existsSync(jpg)) continue;
     try {
-      const a = await ask(jpg, L.text || '', k === pick.length - 1);
-      report.frames.push({ t: +t.toFixed(1), line: L.text, ...a }); log(`t=${t.toFixed(1)}`, a.severity, JSON.stringify(a.problems || []), '|', a.describe);
+      let a = await ask(jpg, L.text || '', false);
+      if (!['none', 'minor', 'serious'].includes(a.severity)) { const b = await ask(jpg, L.text || '', false, true); b.retry = 'plain prompt'; b.first = a.raw; a = b; }
+      report.frames.push({ t: +t.toFixed(1), line: L.text, ...a }); log(`t=${t.toFixed(1)}`, a.severity, JSON.stringify(a.problems || []), '|', a.describe, a.raw || '');
     } catch (e) { report.frames.push({ t: +t.toFixed(1), line: L.text, error: String(e.message || e).slice(0, 120) }); log('frame error', e.message); }
     if (Date.now() - t0 > 12 * 60000) { log('time budget reached'); break; }
   }
   fs.rmSync(fdir, { recursive: true, force: true });
+  try { await fetch(API + '/api/generate', { method: 'POST', body: JSON.stringify({ model: MODEL, keep_alive: 0 }) }); } catch {}
   return 'done';
 }
 
@@ -102,8 +111,9 @@ try { report.ai = await aiCheck(); report.rules = RULES ? 'channel-rules.txt use
 // ---------- 3. summary, record, gate ----------
 const serious = report.frames.filter(f => f.severity === 'serious'), minor = report.frames.filter(f => f.severity === 'minor');
 const off = report.frames.filter(f => f.matches_narration === 'no');
+const unk = report.frames.filter(f => !['none', 'minor', 'serious'].includes(f.severity));
 report.summary = report.ai !== 'done' ? `AI check ${report.ai}` :
-  `${report.frames.length - serious.length - minor.length}/${report.frames.length} frames OK` +
+  `${report.frames.length - serious.length - minor.length - unk.length}/${report.frames.length} frames OK` + (unk.length ? `; ${unk.length} not checked` : '') +
   (serious.length ? `; serious: ${serious.map(f => `${f.t}s ${(f.problems || []).join(', ')}`).join(' | ')}` : '') +
   (minor.length ? `; minor: ${minor.length}` : '') + (off.length ? `; picture off-topic at ${off.map(f => f.t + 's').join(', ')}` : '');
 if (hardFail.length) report.summary = `BLOCKED (${hardFail.join(', ')}); ` + report.summary;
