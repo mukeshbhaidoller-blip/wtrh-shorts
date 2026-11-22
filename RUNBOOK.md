@@ -59,11 +59,13 @@ Older lines marked `NOT UPLOADED` with a `pending/*.json`: same idea (their MP4 
 
 ## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
 
-- TWO videos per day. Publish slots are 12:00 and 19:00 **America/New_York** time, every day.
-- Take the earliest slot that is at least **20 hours after now** and is not already used by a line in `topics.md`.
-  (Runs start at about 06:15 and 12:15 New York time, so the pipeline always stays about one day ahead.)
-- Convert the slot to UTC (`TZ=America/New_York date -d ... -u +%Y-%m-%dT%H:%M:%SZ`, mind daylight saving time).
-  That UTC time is `PUBLISH_AT`.
+- TWO videos per day. **Owner's publish times (2026-11-22): 19:00 (7 PM) and 01:00 (1 AM) India time (Asia/Kolkata, IST)**,
+  every day. (While the US is on EST: 19:00 IST = 08:30 ET, 01:00 IST = 14:30 ET the day before.)
+- Take the earliest of these IST slots that is at least **20 hours after now** and is not already taken in
+  `topics.md` (no other video within 2 hours of it; older lines are in ET: ET + 10:30 h = IST while the US is on EST,
+  + 9:30 h during US daylight time).
+- Log new lines with the IST slot, e.g. `- 2026-11-27 01:00 IST · <title> · ...`.
+- meta.json `date`/`time` are exactly this IST slot (e.g. "27 Nov 2026", "01:00"); Studio's time zone is IST.
 
 ## 2. Pick the topic ("how machines and big things work", realistic 3D)
 
@@ -143,8 +145,8 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
    `done.txt`). First write `<proj>/meta.json` (UTF-8):
    `{"title": "...", "description": "...", "tags": [...], "date": "<D Mon YYYY in IST, e.g. 25 Nov 2026>", "time": "<HH:MM IST, 15-min step>", "telegram_caption": "<title>\nYouTube par publish: <IST> IST (<ET> ET)"}`
    (title ≤ 60 chars, curiosity hook, max 1 emoji; description = 2-3 sentence teaser, Sources line, subscribe line with
-   @WaitThatReallyHappenedUS, then `#shorts` + 4-6 hashtags; 8-12 tags; IST from the slot: 12:00 ET = 22:30 IST the same
-   day, 19:00 ET = 05:30 IST the next day, while the US is on EST). Then
+   @WaitThatReallyHappenedUS, then `#shorts` + 4-6 hashtags; 8-12 tags; `date`/`time` = the IST slot from 1b, e.g. "27 Nov 2026"
+   + "19:00" or "01:00"). Then
    `python3 blender/build_job.py job --proj <proj> --shots <proj>/shots.py --name <job> --out /mnt/user-data/outputs/jobs/<job> --meta <proj>/meta.json`
    (job name e.g. `2026-11-23-1200-<slug>`). It prints the JSON file list: `device_commit_files` it (≤ 40 files per call is
    fine), check sizes with `device_list_dir`, then commit `ready.txt` LAST (any small file). Staged files must live under
@@ -152,7 +154,7 @@ and the kit `blender/kit.py` (helpers: `new_scene`, `world_hdri`, `sun`, `light`
 6. **Do NOT wait for the render** (that waiting used most of the owner's usage). The PC renders (25-50 min), then by
    itself uploads to YouTube Studio with the schedule (section 4) and sends the video + link to the owner's Telegram.
    Right after `ready.txt` is committed, append to `topics.md` on main:
-   `- <slot ET> · <title> · PENDING-PC <job> · <one-line topic> · <main source>`, pull --rebase, push, report, END.
+   `- <slot IST> · <title> · PENDING-PC <job> · <one-line topic> · <main source>`, pull --rebase, push, report, END.
    The next run checks the result (1a).
 7. So the quality gate is BEFORE the job: the cloud test stills (step 3) and, for shots with people, the PC stills job
    (2b) must look right. Only send a job you would be happy to see published.
@@ -176,6 +178,5 @@ is allowed; file via `ytcp-uploads-file-picker input[type=file]` + fetched raw U
 
 ## 5. Report
 
-End with a short message in Hindi written in Roman letters: the title, the planned publish time in IST and US Eastern
-time, that the PC will upload it and send it on Telegram by itself after the render (~25-50 min), what 1a found about
+End with a short message in Hindi written in Roman letters: the title, the planned publish time (IST), that the PC will upload it and send it on Telegram by itself after the render (~25-50 min), what 1a found about
 earlier videos, and anything that went wrong.
