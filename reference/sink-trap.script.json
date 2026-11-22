@@ -1,0 +1,32 @@
+{
+  "title": "If You Connect Your Sink Straight to the Sewer...",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.3,
+  "outro": 1.0,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+    "InterNACHI 'Sewer Gases in the Home' / Wikipedia 'Sewer gas': sewer gas is a mix that includes hydrogen sulfide (rotten-egg smell) and methane; it enters homes through dry or missing traps",
+    "Wikipedia 'Trap (plumbing)' / Oatey 'What is a P-trap and how does it work' / engineerfix 'How a P-Trap Works to Prevent Sewer Gas': the U-shaped bend keeps a plug of water (the trap seal) that blocks sewer gas while letting waste water pass",
+    "2021 International Plumbing Code 1002.4 'Trap seals' (ICC) / IRC P3201.2 (jaspector) / ICC Building Safety Journal 'Overview of plumbing trap requirements': each fixture trap must have a liquid seal of not less than 2 inches and not more than 4 inches",
+    "ASHI Reporter 'Plumbing Vents - Why Basins Sometimes Talk Back' / Wikipedia 'Drain-waste-vent system' / The Physics of Siphonage (Advanced Heat & AC): water rushing down a drain pulls a vacuum that can siphon the trap empty; the vent pipe through the roof lets air in so the seal stays",
+    "Paladin Home Inspections 'What are those white pipes on the roof' / CivoPilot 'What does a roof pipe do': the small pipes on a roof are the plumbing vent stacks",
+    "RectorSeal 'How to Deal with Infrequently Used Floor Drains' / Roto-Rooter 'What happens if I have an unused bathroom drain' / Wikipedia 'Trap primer': in a rarely used drain the trap water evaporates and sewer smell comes back; pouring water in refills the seal"
+  ],
+  "lines": [
+    { "text": "If you connect your sink straight to the sewer, your house will stink like rotten eggs.", "caps": "If you connect your sink | straight to the sewer, | your house will stink | like rotten eggs.", "sfx": [{"at": 0.3, "type": "whoosh", "gain": 0.3}] },
+    { "text": "Because sewer pipes are full of gas, like hydrogen sulfide and methane.", "caps": "Because sewer pipes | are full of gas, | like hydrogen sulfide | and methane." },
+    { "text": "So, plumbers bend the pipe under your sink, into a U.", "caps": "So, plumbers bend the pipe | under your sink, | into a U." },
+    { "text": "Water stays trapped in the bend, and blocks the gas like a plug.", "caps": "Water stays trapped | in the bend, | and blocks the gas | like a plug.", "sfx": [{"at": 0.4, "type": "plop", "gain": 0.3}] },
+    { "text": "It's called a P-trap, and the code wants two to four inches of water in it.", "caps": "It's called a P-trap, | and the code wants | 2 to 4 inches | of water in it." },
+    { "text": "But when a full sink drains fast, it can suck that water right out.", "caps": "But when a full sink | drains fast, | it can suck that water | right out.", "sfx": [{"at": 1.2, "type": "gulp", "gain": 0.35}] },
+    { "text": "So, a vent pipe runs up through your roof, and lets air in behind the water.", "caps": "So, a vent pipe | runs up through your roof, | and lets air in | behind the water." },
+    { "text": "That's the little pipe you see sticking out of your roof.", "caps": "That's the little pipe | you see sticking out | of your roof." },
+    { "text": "But in a drain that nobody uses, the water slowly dries up.", "caps": "But in a drain | that nobody uses, | the water slowly dries up." },
+    { "text": "And the sewer smell comes right back.", "caps": "And the sewer smell | comes right back." },
+    { "text": "So, just pour some water down it, and the seal is back.", "caps": "So, just pour | some water down it, | and the seal is back.", "sfx": [{"at": 0.8, "type": "bubbles", "gain": 0.3}] },
+    { "text": "You see, the only thing between your home and the sewer is a few inches of water.", "caps": "You see, the only thing | between your home | and the sewer | is a few inches of water." },
+    { "text": "That's why there's a weird bend under every sink.", "caps": "That's why there's | a weird bend | under every sink.", "gap": 0.3 }
+  ]
+}
