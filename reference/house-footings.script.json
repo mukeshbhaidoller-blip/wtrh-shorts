@@ -1,0 +1,34 @@
+{
+  "title": "If You Build a House Right on the Dirt...",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "lead": 0.3,
+  "outro": 1.0,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+    "JLC 'Foundation Footing Fundamentals' / Wikipedia 'Shallow foundation' / GreenBuildingAdvisor 'All About Footings': soil compresses and settles under a building's load; a footing is wider than the wall so it spreads the load over more soil",
+    "FEMA EMI IS-280 'Allowable Bearing Capacity' / engineerfix 'What Is a Spread Footing': spreading the same weight over a larger area lowers the pressure on the soil (the snowshoe principle)",
+    "Fine Homebuilding 'How it Works: Frost Heave' / Wikipedia 'Frost heaving' / NRC Canadian Building Digest 128: water in soil freezes into ice lenses that grow and push the ground and footings upward",
+    "Iowa DNR 'Why does water expand when it freezes' / IAPWS (via InspectAPedia): water expands roughly nine percent as it freezes",
+    "IRC R403.1.4 (ICC; WAC 51-51-0403) and Minnesota Rule 1303.1600 'Footing depth for frost protection' (MN Revisor, Cornell LII): footings must sit below the frost line; Minnesota requires 42 inches in the south and 60 inches (five feet) in the northern zone",
+    "Practical Engineering 'Why does concrete need reinforcement' / Explain That Stuff 'Concrete and reinforced concrete' / Ask the Builder 'Reinforcing Steel in Footings': concrete is strong in compression but weak in tension, so steel rebar is cast inside",
+    "FEMA hurricane building-performance reports / DOE BASC 'Continuous load path failure due to improper connections between home and its foundation' / AWC + IRC R403.1.6: houses not anchored can slide off foundations; anchor bolts set in the concrete hold the wooden sill plate down"
+  ],
+  "lines": [
+    { "text": "If you build a house right on the dirt, it slowly sinks.", "caps": "If you build a house | right on the dirt, | it slowly sinks.", "sfx": [{"at": 2.2, "type": "thud", "gain": 0.35}] },
+    { "text": "Because soil gets squeezed under all that weight.", "caps": "Because soil gets squeezed | under all that weight." },
+    { "text": "So, builders dig a trench, and pour a wide concrete footing.", "caps": "So, builders dig a trench, | and pour a wide | concrete footing." },
+    { "text": "It spreads the weight out, like snowshoes on snow.", "caps": "It spreads the weight out, | like snowshoes on snow." },
+    { "text": "But in winter, the water in the soil freezes, and grows.", "caps": "But in winter, | the water in the soil | freezes, and grows." },
+    { "text": "That ice pushes the ground up, and cracks the walls. It's called frost heave.", "caps": "That ice pushes | the ground up, | and cracks the walls. | It's called frost heave.", "sfx": [{"at": 2.0, "type": "slam", "gain": 0.3}] },
+    { "text": "So, footings go below the frost line, where the ground never freezes.", "caps": "So, footings go | below the frost line, | where the ground | never freezes." },
+    { "text": "In northern Minnesota, that's five feet down.", "caps": "In northern Minnesota, | that's 5 feet down." },
+    { "text": "But concrete cracks easily when it bends.", "caps": "But concrete | cracks easily | when it bends." },
+    { "text": "So, steel bars called rebar go inside, and hold it together.", "caps": "So, steel bars | called rebar go inside, | and hold it together." },
+    { "text": "And a strong storm can shove a wooden house right off its base.", "caps": "And a strong storm | can shove a wooden house | right off its base.", "sfx": [{"at": 0.3, "type": "whoosh", "gain": 0.4}] },
+    { "text": "So, steel bolts are set in the wet concrete, to tie the walls down.", "caps": "So, steel bolts | are set in the wet concrete, | to tie the walls down." },
+    { "text": "You see, the ground isn't solid. It squeezes, freezes and moves.", "caps": "You see, | the ground isn't solid. | It squeezes, | freezes and moves." },
+    { "text": "That's why every house stands on a hidden concrete foot.", "caps": "That's why every house | stands on a hidden | concrete foot.", "gap": 0.3 }
+  ]
+}
