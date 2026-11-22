@@ -55,6 +55,11 @@ such record, stage `D:\Ai Video Edit\jobs\<job>\upload-result.json`.
   If the video itself is missing/bad, mark the line `FAILED` and move on. `NOT_LOGGED_IN` → report that the owner must
   run `D:\Ai Video Edit\_claude\uploader\login.bat` once; still make today's video.
 - no result file yet → the PC is still rendering/uploading; leave it.
+- `jobs\_uploaded\<job>-qa.json` (the PC's QA report, section 4a) → read its `summary` and the `frames` with
+  `severity: serious`. A problem that shows up in 2+ videos (e.g. "arm through body", "very dark", "pink texture") is a
+  kit/character/shots bug: fix it in `blender/` before making today's shots, and note the fix in your report.
+  `QA BLOCKED` (qa-block.txt in the job folder, nothing uploaded) → read `qa.json` `hard`; re-render with `--redo` for the bad
+  shots if it is a render problem, then upload as in the `"ok": false` case.
 Older lines marked `NOT UPLOADED` with a `pending/*.json`: same idea (their MP4 is on the git branch named there).
 
 ## 1b. Pick the publish slot (videos are made ONE DAY AHEAD and scheduled on YouTube)
@@ -172,6 +177,17 @@ sends a Telegram text "UPLOAD FAILED ...". The render job's `job.bat` calls it a
 job folder. Step screenshots: `jobs\<job>\upload-shots\`.
 After a good upload AND `TELEGRAM OK` it writes `jobs\_uploaded\<job>.json` and deletes the job folder ~90 s later (the
 video lives on YouTube + Telegram; nothing of it stays on the PC). A failed job keeps its folder for a retry. Proven 2026-11-22 (road-lines, xoWM3B7zIRo).
+
+### 4a. QA before the upload — Qwen3-VL-8B on the PC (since 2026-11-22, $0, no Claude usage)
+`job.bat` runs `D:\Ai Video Edit\_claude\qa\qa.mjs <job>` between the render and the upload:
+1. ffmpeg hard checks: length 10-180 s, black screen > 1.5 s, no sound (mean < -45 dB). Any of these → `qa-block.txt`,
+   NO upload, Telegram text "QA BLOCKED ...".
+2. Qwen3-VL-8B (Ollama, `E:\Ollama`, model `qwen3-vl:8b`, `think:false`) looks at one frame per narration line (max 12)
+   with that line's words, and returns `describe / matches_narration / problems / severity`. Advice only — it never stops
+   the upload (an 8B model has false alarms); its one-line summary is added to the Telegram caption and the full report
+   is kept in `jobs\_uploaded\<job>-qa.json` for section 1a.
+Ollama is started outside the job's process tree (WMI) and the model is unloaded after the last frame (`keep_alive 0`), so
+the GPU is free again. Repo copy: `blender/pc-helper/qa/qa.mjs`.
 
 Fallbacks, only if the PC uploader keeps failing: YouTube Studio through the built-in browser by hand (studio.youtube.com
 is allowed; file via `ytcp-uploads-file-picker input[type=file]` + fetched raw URL), or Zapier while its trial lasts.

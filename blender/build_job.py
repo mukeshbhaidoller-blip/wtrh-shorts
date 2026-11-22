@@ -109,7 +109,9 @@ echo === BLENDER END %TIME% === >> "job-log.txt"
 if exist share.mp4 (echo RENDER_OK > result.txt) else (echo RENDER_FAILED > result.txt)
 rem keep the D: drive clean: drop this job's frames once the video exists, and job folders older than 10 days
 if exist share.mp4 rd /s /q frames
-if exist share.mp4 if exist meta.json node "D:\\Ai Video Edit\\_claude\\uploader\\upload.mjs" "%~dp0meta.json" > upload-log.txt 2>&1
+rem QA: ffmpeg hard checks + Qwen3-VL (local Ollama) frame review; qa-block.txt stops the upload
+if exist share.mp4 if exist "D:\\Ai Video Edit\\_claude\\qa\\qa.mjs" node "D:\\Ai Video Edit\\_claude\\qa\\qa.mjs" "%~dp0." > qa-log.txt 2>&1
+if exist share.mp4 if exist meta.json if not exist qa-block.txt node "D:\\Ai Video Edit\\_claude\\uploader\\upload.mjs" "%~dp0meta.json" > upload-log.txt 2>&1
 for /d %%D in ("D:\\Ai Video Edit\\jobs\\*") do if exist "%%D\\delete-me.txt" if exist "%%D\\done.txt" rd /s /q "%%D"
 forfiles /p "D:\\Ai Video Edit\\jobs" /d -10 /c "cmd /c if @isdir==TRUE rd /s /q @path" > nul 2>&1
 echo === JOB END %TIME% === >> "job-log.txt"
