@@ -186,6 +186,9 @@ video lives on YouTube + Telegram; nothing of it stays on the PC). A failed job 
    with that line's words, and returns `describe / matches_narration / problems / severity`. Advice only — it never stops
    the upload (an 8B model has false alarms); its one-line summary is added to the Telegram caption and the full report
    is kept in `jobs\_uploaded\<job>-qa.json` for section 1a.
+Owner's teaching: `_claude\qa\channel-rules.txt` (his rules, plain text, sent with every frame — never overwrite it
+without asking; you may ADD a line for a recurring problem you fixed) and `_claude\qa\examples\*.jpg` (max 2 "good look"
+pictures sent as style reference).
 Ollama is started outside the job's process tree (WMI) and the model is unloaded after the last frame (`keep_alive 0`), so
 the GPU is free again. Repo copy: `blender/pc-helper/qa/qa.mjs`.
 

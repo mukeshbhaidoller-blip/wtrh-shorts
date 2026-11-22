@@ -1,0 +1,22 @@
+CHANNEL: "Wait, That Really Happened" - YouTube Shorts for a US audience.
+(Owner: you can change or add rules here in simple English or Hindi. One rule per line. Save the file, that's all.)
+
+WHAT THE VIDEOS ARE
+- Realistic 3D "how does it work" explainers: cars, machines, airplanes, engines, how houses and buildings are built.
+- Must look REAL, like a movie or a car advert. Never cartoon, toy-like or video-game looking.
+- A realistic human character appears in several shots, so the viewer feels he is inside the video.
+- Vertical 9:16, about 40-60 seconds, white bold captions near the middle-bottom of the screen.
+
+GOOD FRAME
+- One clear main subject (the machine part or the person), sharp, well lit, easy to understand on a phone.
+- Natural light and real materials: metal shines, rubber is matte, roads and walls have texture.
+- The picture shows what the narrator is saying at that moment.
+
+BAD FRAME (report these)
+- Looks like a cartoon, plastic toy or old video game.
+- Person's face, hands, arms or legs look broken, melted or pass through his body or through objects.
+- Person floating above the ground or sunk into it.
+- Caption covers the main subject or is cut off at the edge.
+- Picture too dark to see, or washed out white.
+- Nothing interesting in the frame (empty background only).
+- Gore, blood, injury, politics, flags or real brand logos.

@@ -5,7 +5,7 @@
 //    Its findings are advice only (they never stop an upload): they go into the Telegram caption and into
 //    jobs\_uploaded\<job>-qa.json so the next Claude run can fix recurring problems in kit.py / character.py.
 // --test: write the report only (no qa-block.txt, no meta.json change).
-import fs from 'node:fs'; import path from 'node:path'; import { execFileSync, spawnSync } from 'node:child_process';
+import fs from 'node:fs'; import { fileURLToPath } from 'node:url'; import path from 'node:path'; import { execFileSync, spawnSync } from 'node:child_process';
 
 const FF = 'C:\\Users\\Mukesh\\.clip-studio\\ffmpeg\\bin\\ffmpeg.exe';
 const OLLAMA = 'E:\\Ollama\\ollama.exe', MODEL = 'qwen3-vl:8b', API = 'http://127.0.0.1:11434';
@@ -39,7 +39,9 @@ async function ensureServer() {
   for (let i = 0; i < 30; i++) { await new Promise(r => setTimeout(r, 2000)); if (await up()) return true; }
   return false;
 }
-const PROMPT = (line) => `You are checking one frame of a realistic 3D animated YouTube Short (how-it-works explainer, rendered in Blender).
+// The owner's own rules for his channel (plain text, editable in Notepad): D:\\Ai Video Edit\\_claude\\qa\\channel-rules.txt
+const RULES = (() => { try { return fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'channel-rules.txt'), 'utf8').trim().slice(0, 3000); } catch { return ''; } })();
+const PROMPT = (line) => (RULES ? `Rules of this YouTube channel, written by its owner (follow them when you judge):\n${RULES}\n\n` : '') + `You are checking one frame of a realistic 3D animated YouTube Short (how-it-works explainer, rendered in Blender).
 The narrator says at this moment: "${line}"
 Look carefully and answer ONLY with JSON:
 {"describe": "<one sentence: what is in the picture>",
@@ -49,12 +51,23 @@ Look carefully and answer ONLY with JSON:
 Problems to look for: picture black, blank or almost all one colour; very dark or blown out; a human body that looks broken
 (arms or legs through the body or through objects, twisted joints, missing head or hands, person floating or sunk into the ground);
 objects floating, cutting through each other, or missing textures (bright pink/magenta, checkerboard); caption text cut off,
-overlapping or hard to read; the main subject hard to see. Do not invent problems: if it looks fine, "problems": [] and "severity": "none".`;
+overlapping or hard to read; the main subject hard to see. Also list anything that breaks the channel rules above. Do not invent problems: if it looks fine, "problems": [] and "severity": "none".`;
 
+// Owner's GOOD example pictures (any .jpg/.png in qa\\examples, max 2 used) = the look to aim for
+let EXAMPLES = [];
+function loadExamples(tmp) {
+  const ed = path.join(path.dirname(fileURLToPath(import.meta.url)), 'examples');
+  if (!fs.existsSync(ed)) return;
+  const files = fs.readdirSync(ed).filter(f => /\.(jpe?g|png|webp)$/i.test(f)).slice(0, 2);
+  files.forEach((f, i) => { const o = path.join(tmp, `ex${i}.jpg`);
+    ff(['-v', 'error', '-y', '-i', path.join(ed, f), '-vf', 'scale=448:-2', '-frames:v', '1', '-q:v', '4', o]);
+    if (fs.existsSync(o)) EXAMPLES.push(fs.readFileSync(o).toString('base64')); });
+}
 async function ask(jpg, line, last) {
   const body = { model: MODEL, stream: false, think: false, format: 'json', keep_alive: last ? 0 : '5m',
     options: { temperature: 0, num_ctx: 4096 },
-    messages: [{ role: 'user', content: PROMPT(line), images: [fs.readFileSync(jpg).toString('base64')] }] };
+    messages: [{ role: 'user', content: (EXAMPLES.length ? `The first ${EXAMPLES.length} picture(s) are GOOD examples of this channel's look (style reference only). Judge ONLY the LAST picture.\n\n` : '') + PROMPT(line),
+      images: [...EXAMPLES, fs.readFileSync(jpg).toString('base64')] }] };
   const r = await fetch(API + '/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(240000) });
   const j = await r.json(); const txt = (j.message && j.message.content) || '';
   try { return JSON.parse(txt.slice(txt.indexOf('{'), txt.lastIndexOf('}') + 1)); } catch { return { describe: txt.slice(0, 200), problems: [], severity: 'unknown' }; }
@@ -67,7 +80,7 @@ async function aiCheck() {
   // one frame per line (max 12, evenly picked), at 60% of the line so the cut has happened
   const pick = lines.length <= 12 ? lines : Array.from({ length: 12 }, (_, i) => lines[Math.round(i * (lines.length - 1) / 11)]);
   if (!(await ensureServer())) return 'ollama not running';
-  const fdir = path.join(dir, 'qa-frames'); fs.mkdirSync(fdir, { recursive: true });
+  const fdir = path.join(dir, 'qa-frames'); fs.mkdirSync(fdir, { recursive: true }); loadExamples(fdir);
   const t0 = Date.now();
   for (let k = 0; k < pick.length; k++) {
     const L = pick[k], t = Math.min(dur - 0.1, L.start + 0.6 * (L.end - L.start));
@@ -84,7 +97,7 @@ async function aiCheck() {
   return 'done';
 }
 
-try { report.ai = await aiCheck(); } catch (e) { report.ai = 'error: ' + String(e.message || e).slice(0, 150); }
+try { report.ai = await aiCheck(); report.rules = RULES ? 'channel-rules.txt used' : 'no rules file'; report.examples = EXAMPLES.length; } catch (e) { report.ai = 'error: ' + String(e.message || e).slice(0, 150); }
 
 // ---------- 3. summary, record, gate ----------
 const serious = report.frames.filter(f => f.severity === 'serious'), minor = report.frames.filter(f => f.severity === 'minor');
