@@ -1,0 +1,99 @@
+{
+ "title": "If You Press a Pedal With Your Foot...",
+ "voice": "am_michael",
+ "speed": 1.0,
+ "lead": 0.3,
+ "outro": 1.0,
+ "gap": 0.16,
+ "music": "bed",
+ "sources": [
+  "HowStuffWorks 'How Brakes Work' (science.howstuffworks.com/brake.htm) / Jalopnik 'Here's How Your Foot Is Able To Bring A 4,000 Pound Car To A Halt': leverage plus hydraulics multiply pedal force",
+  "Wikipedia 'Hydraulic brake' / HowStuffWorks 'Hydraulic machines: the basic idea' / MSU College Physics 'Pascal's principle' / YourMechanic 'How does brake fluid work': brake fluid is nearly incompressible; pressure from the master cylinder is sent equally to all wheels and larger caliper pistons multiply the force",
+  "Wikipedia 'Power brake' / HowStuffWorks 'How Power Brakes Work': the vacuum booster uses engine vacuum to add force to the pedal push",
+  "Wikipedia 'Brake' / FenderBender 'The physics of braking': friction brakes turn the car's kinetic energy into heat",
+  "Wikipedia 'Brake fade' / Brake & Front End 'Brake Fade (Pads Overheat)': overheated brakes lose grip (fade)",
+  "US patents 'Ventilated brake rotor' / 'Internally-ventilated brake disks with improved cooling' / AA1Car 'Brake rotor': vented discs have internal vanes that pump cooling air",
+  "24h-lemans.com 'Why do brakes glow red during the 24 Hours of Le Mans?' / FlowRacers 'How Hot Do F1 Brakes Get?' / IMSA 'Lexus tech talk: brakes': race brake discs glow red at well over 1,000 degrees F (F1 discs ~1,000 C)",
+  "HowStuffWorks 'How Anti-Lock Brakes Work' / YourMechanic 'How Anti-Lock Brakes Work' / Consumer Guide 'What are anti-lock brakes?': locked wheels skid and can't steer; ABS pulses the brakes up to about 15 times per second so the driver keeps steering"
+ ],
+ "lines": [
+  {
+   "text": "If you press a pedal with your foot, a two-ton car stops.",
+   "caps": "If you press a pedal | with your foot, | a 2-ton car stops."
+  },
+  {
+   "text": "But your foot alone isn't strong enough to stop two tons.",
+   "caps": "But your foot alone | isn't strong enough | to stop 2 tons."
+  },
+  {
+   "text": "So, the pedal pushes a piston into brake fluid, which can't be squeezed.",
+   "caps": "So, the pedal pushes a piston | into brake fluid, | which can't be squeezed."
+  },
+  {
+   "text": "That fluid carries the push to all four wheels, and makes it bigger.",
+   "caps": "That fluid carries the push | to all 4 wheels, | and makes it bigger."
+  },
+  {
+   "text": "And a booster uses engine vacuum to push even harder.",
+   "caps": "And a booster | uses engine vacuum | to push even harder."
+  },
+  {
+   "text": "At each wheel, a caliper squeezes pads onto a spinning steel disc.",
+   "caps": "At each wheel, | a caliper squeezes pads | onto a spinning steel disc.",
+   "sfx": [
+    {
+     "at": 1.3,
+     "type": "tock",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "Friction turns the car's motion into heat.",
+   "caps": "Friction turns | the car's motion | into heat.",
+   "sfx": [
+    {
+     "at": 1.2,
+     "type": "sizzle",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "But hot brakes grip less. It's called brake fade.",
+   "caps": "But hot brakes | grip less. | It's called brake fade."
+  },
+  {
+   "text": "So, the discs have air vanes inside, like a fan, to cool them down.",
+   "caps": "So, the discs | have air vanes inside, | like a fan, | to cool them down."
+  },
+  {
+   "text": "On race cars, they still glow red hot, at over a thousand degrees.",
+   "caps": "On race cars, | they still glow red hot, | at over 1,000 degrees."
+  },
+  {
+   "text": "But squeeze too hard, and the wheels lock up, and the car slides.",
+   "caps": "But squeeze too hard, | and the wheels lock up, | and the car slides.",
+   "sfx": [
+    {
+     "at": 1.6,
+     "type": "slide",
+     "gain": 0.35
+    }
+   ]
+  },
+  {
+   "text": "So, ABS pumps the brakes up to fifteen times a second, so you can still steer.",
+   "caps": "So, ABS pumps the brakes | up to 15 times a second, | so you can still steer."
+  },
+  {
+   "text": "You see, brakes don't stop your car. They turn its speed into heat.",
+   "caps": "You see, brakes | don't stop your car. | They turn its speed | into heat."
+  },
+  {
+   "text": "That's why your wheels feel hot after a long drive down a mountain.",
+   "caps": "That's why your wheels | feel hot after a long drive | down a mountain.",
+   "gap": 0.3
+  }
+ ]
+}
