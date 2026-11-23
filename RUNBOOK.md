@@ -75,6 +75,12 @@ Older lines marked `NOT UPLOADED` with a `pending/*.json`: same idea (their MP4 
 - Log new lines with the IST slot, e.g. `- 2026-11-27 01:00 IST · <title> · ...`.
 - meta.json `date`/`time` are exactly this IST slot (e.g. "27 Nov 2026", "01:00"); Studio's time zone is IST.
 
+## 1c. Style A/B test (2026-11-23, until the owner decides)
+Read `reference/experiments.md`. If a row has an empty `job`, this video IS that test: follow its settings (script
+shape, script.json `style`/`music`/`hud`, `*keywords`, meta `telegram_caption`) and fill in the row. Styles are drawn by
+`build_job.py` (`cues` and `job` read script.json `style`); check the caption PNGs in the job's `caps\` folder before
+committing (mid = yellow keyword in the middle, pops = p*.png big labels, hud = h*.png checklist states).
+
 ## 2. Pick the topic ("how machines and big things work", realistic 3D)
 
 The owner approved the realistic Blender road-lines Short (`reference/road-lines-blender/`). Make more like it.
