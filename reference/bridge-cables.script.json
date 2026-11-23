@@ -1,0 +1,73 @@
+{
+ "title": "This Bridge Hangs From 80,000 Miles of Wire",
+ "voice": "am_michael",
+ "speed": 1.05,
+ "lead": 0.3,
+ "outro": 0.8,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "hud",
+ "hud": {"title": "BRIDGE BUILD", "steps": [["Towers", 2], ["Anchorages", 4], ["Cables", 6], ["Suspenders", 8], ["Road deck", 9]]},
+ "sources": [
+  "Golden Gate Bridge Highway & Transportation District 'Design & Construction Stats' + exhibit 'Cross-section of a Main Cable' / Make Tech Easier 'Golden Gate Bridge main cables' / Space Group '27,572 Steel Wires per Cable': each main cable holds 27,572 wires (61 strands), both cables together about 80,000 miles of galvanized steel wire, cable diameter 36 3/8 in (about a yard), wire about 0.192 in (thinner than a pencil)",
+  "Golden Gate Bridge exhibit 'Spinning the Main Cables' / PBS American Experience 'Spinning the Cables' / NEH 'Steel into Gold': the cables were spun in place, spinning wheels carrying the wire back and forth over the towers between the anchorages, then compacted into round cables",
+  "Encyclopaedia Britannica 'Suspension bridge' / MadeHow 'Suspension Bridge' / Encyclopedia.com 'Suspension Bridge': towers are built first, the cable ends are held by massive concrete anchorages on land, the deck hangs from vertical suspenders; the cables are in tension and the towers carry the load down in compression",
+  "Golden Gate Bridge exhibit 'Hanging the Roadway Deck' / HMdb 'Hanging the Roadway Deck' marker: the roadway steel was hung out from the towers in both directions at once so the load on the cables stayed balanced",
+  "Britannica 'Suspension bridge': the longest bridge spans in the world are suspension bridges"
+ ],
+ "lines": [
+  {
+   "text": "This bridge hangs from eighty thousand miles of wire.",
+   "caps": "This bridge hangs | from 80,000 miles | of wire.",
+   "sfx": [{"at": 1.4, "type": "zip", "gain": 0.3}]
+  },
+  {
+   "text": "If you need a road over deep, rough water, you can't just stand it on posts.",
+   "caps": "If you need a road | over deep, rough water, | you can't just | stand it on posts."
+  },
+  {
+   "text": "So you build two giant towers, one near each shore.",
+   "caps": "So you build | two giant towers, | one near each shore.",
+   "sfx": [{"at": 1.0, "type": "thud", "gain": 0.35}]
+  },
+  {
+   "text": "But a cable pulled tight between them would just drag the towers over.",
+   "caps": "But a cable pulled tight | between them | would just drag | the towers over."
+  },
+  {
+   "text": "So you tie each end into a huge block of concrete on land, called an anchorage.",
+   "caps": "So you tie each end | into a huge block | of concrete on land, | called an anchorage.",
+   "sfx": [{"at": 1.6, "type": "slam", "gain": 0.3}]
+  },
+  {
+   "text": "But no single rope is strong enough to hold up a whole road.",
+   "caps": "But no single rope | is strong enough | to hold up a whole road."
+  },
+  {
+   "text": "So you spin the cable right in the sky, with wheels pulling wire after wire across.",
+   "caps": "So you spin the cable | right in the sky, | with wheels pulling | wire after wire across.",
+   "sfx": [{"at": 1.8, "type": "zip", "gain": 0.3}]
+  },
+  {
+   "text": "Twenty-seven thousand, five hundred seventy-two wires, each thinner than a pencil, squeezed into one cable a yard thick.",
+   "caps": "27,572 wires, | each thinner than a pencil, | squeezed into one cable | a yard thick."
+  },
+  {
+   "text": "Then you hang steel ropes straight down from it, called suspenders.",
+   "caps": "Then you hang steel ropes | straight down from it, | called suspenders."
+  },
+  {
+   "text": "And you lift the road up in pieces, out from both towers at once, so the cables pull evenly.",
+   "caps": "And you lift the road | up in pieces, | out from both towers at once, | so the cables pull evenly.",
+   "sfx": [{"at": 1.2, "type": "slam", "gain": 0.3}]
+  },
+  {
+   "text": "You see, the road isn't held up from below. It hangs, and the towers just push straight down.",
+   "caps": "You see, the road | isn't held up from below. | It hangs, | and the towers just | push straight down."
+  },
+  {
+   "text": "That's why the longest bridge spans on Earth all hang from wire.",
+   "caps": "That's why the longest | bridge spans on Earth | all hang from wire."
+  }
+ ]
+}
