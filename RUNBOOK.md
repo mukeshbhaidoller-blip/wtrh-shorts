@@ -29,6 +29,9 @@ upload; finish with a short note (in Hindi written in Roman letters) saying what
    `D:\Ai Video Edit\jobs` must work and `heartbeat.txt` there must be < 3 minutes old (the PC render helper writes it every
    20 s). If the PC can't be reached or the heartbeat is old: STOP, upload nothing, report "PC band hai / helper nahi chal
    raha" in the Hindi report. Never try to render the full video in the cloud (no GPU here: it would take days).
+   If `device_list_dir` says the folder is not connected (or get_device_info shows no connected folders) it is often only
+   the link waking up: run `sleep 90` in Bash, ToolSearch "device" again, retry — up to 4 tries (~6 min) before giving up.
+   Never call device_request_folder_access in a scheduled run (nobody is there to approve it).
 3. Load the `anthropic-skills:faceless-shorts` skill and run its `scripts/setup.sh` (only the Kokoro voice, ffmpeg and
    Python are needed; Whisper may fail to download, that is fine).
 4. For test stills: `python3.11 -m venv ~/bvenv && ~/bvenv/bin/pip install bpy==4.5.16` (Blender as a Python module, same
