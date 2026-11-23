@@ -1,0 +1,139 @@
+{
+ "title": "This Crane Lifts Itself Into the Sky",
+ "voice": "am_michael",
+ "speed": 1.05,
+ "lead": 0.3,
+ "outro": 0.8,
+ "gap": 0.16,
+ "music": "none",
+ "style": "nomusic",
+ "sources": [
+  "HowStuffWorks 'How Tower Cranes Work' (p.3 'Why Don't Tower Cranes Fall Over?') / Heavy Equipment College 'How Do Tower Cranes Work?' / Scienceabc 'How Do Tower Cranes Work': the short counter-jib carries heavy concrete counterweight blocks that balance the load on the long working jib; the mast is bolted to a large concrete foundation pad (HowStuffWorks: about 400,000 lb)",
+  "HowStuffWorks 'How Much Weight Can Tower Cranes Lift?' / EP0667315B1 'Method and device to limit the load moment of a tower crane' / Maxim Crane 'Tower Cranes: Types, Parts, and How They Work': the further out the trolley carries a load, the less it may weigh; load-moment and max-load limiters stop the crane from exceeding its limits",
+  "HowStuffWorks 'How Do Tower Cranes Grow?' / Heavy Equipment College 'How Tower Cranes Are Put Together' / Astro Crane 'How Do Tower Cranes Work?' / US3485384A 'Method of climbing a tower crane': a climbing frame with hydraulic rams jacks the top of the crane up by one mast section (about 20 ft) and the crane lifts in a new mast section to fill the gap",
+  "UK HSE 'Tower crane slew brakes' safety bulletin / CPA TCIG TIN 038 / KHL 'Weather vane your tower crane for Hurricane Irene': when out of service the slew brake is released so the jib can turn freely with the wind (weathervaning) instead of resisting it"
+ ],
+ "lines": [
+  {
+   "text": "If you hang a steel beam off the end of a long arm, the whole crane tips over.",
+   "caps": "If you hang a steel beam | off the end of a long arm, | the whole crane | tips over.",
+   "sfx": [
+    {
+     "at": 2.6,
+     "type": "slam",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "So you stack giant concrete blocks on a short arm out the back.",
+   "caps": "So you stack giant | concrete *blocks | on a short arm | out the back.",
+   "sfx": [
+    {
+     "at": 0.9,
+     "type": "thud",
+     "gain": 0.4
+    },
+    {
+     "at": 1.5,
+     "type": "thud",
+     "gain": 0.4
+    }
+   ]
+  },
+  {
+   "text": "But all that weight presses down on one skinny steel tower.",
+   "caps": "But all that weight | presses down | on one skinny steel tower.",
+   "sfx": [
+    {
+     "at": 0.8,
+     "type": "slam",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "So you bolt it to a concrete pad weighing around four hundred thousand pounds.",
+   "caps": "So you bolt it | to a concrete pad | weighing around | *400,000 pounds.",
+   "sfx": [
+    {
+     "at": 0.7,
+     "type": "tock",
+     "gain": 0.4
+    },
+    {
+     "at": 1.0,
+     "type": "tock",
+     "gain": 0.4
+    }
+   ]
+  },
+  {
+   "text": "But roll a heavy load too far out, and the balance is gone.",
+   "caps": "But roll a heavy load | too far *out, | and the balance is gone.",
+   "sfx": [
+    {
+     "at": 0.5,
+     "type": "zip",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "So sensors weigh every lift, and stop the crane at the limit.",
+   "caps": "So *sensors weigh | every lift, | and stop the crane | at the limit.",
+   "sfx": [
+    {
+     "at": 2.0,
+     "type": "alarm",
+     "gain": 0.2
+    }
+   ]
+  },
+  {
+   "text": "But the building keeps growing, until it's taller than the crane.",
+   "caps": "But the building | keeps growing, | until it's taller | than the crane."
+  },
+  {
+   "text": "So the crane climbs itself. Hydraulic jacks push the whole top up about twenty feet,",
+   "caps": "So the crane | *climbs itself. | Hydraulic jacks push | the whole top up | about 20 feet,",
+   "sfx": [
+    {
+     "at": 1.6,
+     "type": "slide",
+     "gain": 0.35
+    }
+   ]
+  },
+  {
+   "text": "and it lifts in a new steel section to fill the gap.",
+   "caps": "and it lifts in | a new steel *section | to fill the gap.",
+   "sfx": [
+    {
+     "at": 1.8,
+     "type": "slam",
+     "gain": 0.35
+    }
+   ]
+  },
+  {
+   "text": "At night, they leave it free to spin, so it turns with the wind like a weathervane.",
+   "caps": "At night, they leave it | free to spin, | so it turns with the wind | like a *weathervane.",
+   "sfx": [
+    {
+     "at": 2.2,
+     "type": "whoosh",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "You see, a crane never fights the weight or the wind. It balances them.",
+   "caps": "You see, a crane | never fights the weight | or the wind. | It *balances them."
+  },
+  {
+   "text": "That's why the crane over your city points a different way every morning.",
+   "caps": "That's why the crane | over your city | points a different way | every *morning."
+  }
+ ]
+}

@@ -9,7 +9,7 @@ Control video (old style, for comparison): the extra run of 23 Nov morning.
 |---|---|---|---|---|
 | 1 | Kahani + beech caption | script.json `"style": "mid"`; write the script as a "you" problem → fix chain ("If you… / But… / So you… / But then… / So you…", a new problem every 5-8 s, each fix adds something visible) ending "…and you've built <thing>." Every caption chunk has ONE `*keyword` (it turns yellow). | 2026-11-25-0100-roof-build | 25 Nov 01:00 IST |
 | 2 | Bade keyword + sound | `"style": "pops"`; every caption chunk that holds the key noun/number gets `*keyword` (aim 6-10 per video: names, numbers, the thing being built). They pop big and yellow on the word with a pop SFX. | 2026-11-25-1900-rail-track | 25 Nov 19:00 IST |
-| 3 | Music hatao, SFX badhao | `"style": "nomusic"` AND `"music": "none"` (BEFORE mix.py); add `*keyword` on 6-10 chunks (they get a pop) and per-line `"sfx"` for real actions (thud, slam, zip, sizzle…). The mix is loudness-normalised to -15 LUFS. |  |  |
+| 3 | Music hatao, SFX badhao | `"style": "nomusic"` AND `"music": "none"` (BEFORE mix.py); add `*keyword` on 6-10 chunks (they get a pop) and per-line `"sfx"` for real actions (thud, slam, zip, sizzle…). The mix is loudness-normalised to -15 LUFS. | 2026-11-28-0100-tower-crane | 28 Nov 01:00 IST |
 | 4 | Progress board | `"style": "hud"` + `"hud": {"title": "<THING> BUILD", "steps": [["<step 1>", <line index>], …]}` (3-6 steps, each ticks at the start of that line, with a sparkle SFX). Pick a topic where something is built step by step. |  |  |
 
 In meta.json set `"telegram_caption": "TEST <n>/4 · Option: <option>\n<title>"` so the owner knows which one he is watching
