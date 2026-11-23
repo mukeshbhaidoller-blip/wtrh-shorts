@@ -1,0 +1,141 @@
+{
+ "title": "Why Train Tracks Sit on a Pile of Rocks",
+ "voice": "am_michael",
+ "speed": 1.08,
+ "lead": 0.3,
+ "outro": 0.8,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "pops",
+ "sources": [
+  "TxDOT Rail Design Manual 'Ballast' / Wikipedia 'Track ballast' / Trains.com 'Track ballast' / Mental Floss 'Why are there crushed stones alongside railroad tracks?': crossties spread the load of the rails; ballast is crushed (angular) stone that interlocks to hold the ties in place, lets water drain away and keeps the track bed from turning to mud",
+  "Wikipedia 'Rail fastening system' (tie plates) / American-Rails.com 'Railroad spikes' / Trains.com 'What holds railroad track in place?': steel tie plates and spikes hold the rails to the ties and keep them at gauge; US standard gauge is 4 ft 8 1/2 in (Britannica 'Gauge', Wikipedia 'Standard-gauge railway')",
+  "FRA 'Track Buckling Prevention' training module / FRA 'Track Buckling Prevention: Theory, Safety Concepts and Applications' (2013): steel rails expand in heat; continuous welded rail can buckle sideways on hot days ('sun kink')",
+  "Practical Engineering 'Why Railroads Don't Need Expansion Joints' (2023) / RailwayNews 'Continuous Welded Rail explained': old jointed track had small gaps at bolted joints for expansion, which made the clickety-clack sound; welded rail removes them",
+  "Britannica 'Welded rail' / Union Pacific 'Long Rail Is a Game Changer' (2015) / Trains.com: rails are welded into long strings (typically 1,440 ft; UP long rail 1,600 ft), i.e. over a quarter mile",
+  "Wikipedia 'Rail stressing' / SafeRack glossary 'Rail neutral temperature' / SunRail CWR plan: welded rail is heated or stretched with hydraulic tensors before it is fastened, so it is stress-free at a warm 'neutral' temperature (about 90-110 F) and only buckles on very hot days"
+ ],
+ "lines": [
+  {
+   "text": "If you lay steel rails straight on the dirt, the first heavy train pushes them into the ground.",
+   "caps": "If you lay steel rails | straight on the *dirt, | the first heavy train | pushes them | into the ground.",
+   "sfx": [
+    {
+     "at": 0.3,
+     "type": "whoosh",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "So you lay wooden ties underneath, to spread the weight out wide.",
+   "caps": "So you lay wooden *ties | underneath, to spread | the weight out wide.",
+   "sfx": [
+    {
+     "at": 0.9,
+     "type": "thud",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "But then it rains, the dirt turns to mud, and the ties start sinking too.",
+   "caps": "But then it rains, | the dirt turns to *mud, | and the ties start sinking too."
+  },
+  {
+   "text": "So you dig it out, and pour in a thick bed of sharp, crushed rock, called ballast.",
+   "caps": "So you dig it out, | and pour in a thick bed | of sharp, crushed rock, | called *ballast.",
+   "sfx": [
+    {
+     "at": 1.4,
+     "type": "slide",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "Water drains straight through it, and the sharp edges lock together, so the ties can't slide.",
+   "caps": "Water drains straight through it, | and the sharp edges | lock together, | so the ties can't slide.",
+   "sfx": [
+    {
+     "at": 0.3,
+     "type": "bubbles",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "But every train shoves the rails sideways, and they slowly creep apart.",
+   "caps": "But every train shoves | the rails sideways, | and they slowly creep apart."
+  },
+  {
+   "text": "So you nail them down with steel plates and spikes, exactly four feet, eight and a half inches apart.",
+   "caps": "So you nail them down | with steel plates and *spikes, | exactly | *4'8½\" apart.",
+   "sfx": [
+    {
+     "at": 0.7,
+     "type": "tock",
+     "gain": 0.35
+    },
+    {
+     "at": 1.5,
+     "type": "tock",
+     "gain": 0.35
+    }
+   ]
+  },
+  {
+   "text": "But in the summer sun, steel grows, and the rail can bend sideways into a sun kink.",
+   "caps": "But in the summer sun, | steel grows, | and the rail can bend | sideways into a sun *kink.",
+   "sfx": [
+    {
+     "at": 2.4,
+     "type": "zip",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "Old tracks left small gaps between the rails. That's the clickety-clack you hear.",
+   "caps": "Old tracks left | small gaps between the rails. | That's the *clickety-clack | you hear.",
+   "sfx": [
+    {
+     "at": 2.6,
+     "type": "tock",
+     "gain": 0.3
+    },
+    {
+     "at": 2.9,
+     "type": "tock",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "Today, crews weld the rails into one long ribbon, over a quarter mile long.",
+   "caps": "Today, crews weld the rails | into one long *ribbon, | over a quarter mile long.",
+   "sfx": [
+    {
+     "at": 0.8,
+     "type": "sizzle",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "And they stretch it tight before clamping it down, as if it were already a hot day.",
+   "caps": "And they stretch it tight | before clamping it down, | as if it were already | a hot day."
+  },
+  {
+   "text": "Add a heavy train on top, and you've built a railroad track.",
+   "caps": "Add a heavy train on top, | and you've built | a *railroad track.",
+   "sfx": [
+    {
+     "at": 0.2,
+     "type": "whoosh",
+     "gain": 0.3
+    }
+   ]
+  }
+ ]
+}
