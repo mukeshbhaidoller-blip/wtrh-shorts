@@ -1,0 +1,92 @@
+{
+  "title": "Ships Can't Sail Down Rapids... So We Built Water Elevators",
+  "voice": "am_michael",
+  "speed": 1.04,
+  "lead": 0.3,
+  "outro": 1.0,
+  "gap": 0.16,
+  "music": "bed",
+  "sources": [
+    "USACE Detroit District 'Frequently Asked Soo Locks Questions' / Soo Locks (Wikipedia) / saultstemarie.com FAQ: the St. Marys River drops about 21 feet from Lake Superior to Lake Huron at Sault Ste. Marie, Michigan; the locks lift and lower ships about 21 feet",
+    "USACE Detroit District Soo Locks FAQ / saultstemarie.com FAQ / Michigan State University 'The Soo Locks': no pumps are used; water flows by gravity through tunnels (culverts) in the lock walls when valves open",
+    "USACE Detroit District Soo Locks FAQ / saultstemarie.com / EUP News: about 22 million gallons of water fill the Poe Lock; the Poe Lock (1,200 ft long) is the one that takes the 1,000-foot lake freighters",
+    "Britannica 'Canal: Locks' / Wikipedia 'Lock (water navigation)' / USACE EM 1110-2-2703 'Lock Gates and Operating Equipment': miter gates meet in a V pointing upstream so the higher water presses them shut; they can only be opened once the water levels on both sides are equal",
+    "USACE Tulsa District 'How Locks Operate' / USGS 'Navigation' water-science page: a lock is a chamber with gates at both ends; filling or emptying it raises or lowers the boat to the next water level"
+  ],
+  "lines": [
+    {
+      "text": "If you sail a ship out of Lake Superior, the river in front of you drops twenty-one feet.",
+      "caps": "If you sail a ship | out of Lake Superior, | the river in front of you | drops 21 feet.",
+      "sfx": [
+        {
+          "at": 0.3,
+          "type": "whoosh",
+          "gain": 0.3
+        }
+      ]
+    },
+    {
+      "text": "And a thousand-foot freighter can't just ride down the rapids.",
+      "caps": "And a 1,000-foot freighter | can't just ride | down the rapids."
+    },
+    {
+      "text": "So, in Michigan, engineers built the Soo Locks, a giant concrete box with gates at both ends.",
+      "caps": "So, in Michigan, | engineers built the Soo Locks, | a giant concrete box | with gates at both ends."
+    },
+    {
+      "text": "The ship sails in, and the gates behind it swing shut.",
+      "caps": "The ship sails in, | and the gates behind it | swing shut.",
+      "sfx": [
+        {
+          "at": 1.6,
+          "type": "thud",
+          "gain": 0.35
+        }
+      ]
+    },
+    {
+      "text": "But here's the crazy part. There are no pumps.",
+      "caps": "But here's the crazy part. | There are no pumps."
+    },
+    {
+      "text": "Valves open in the walls, and gravity drains the water down to the lower lake.",
+      "caps": "Valves open in the walls, | and gravity drains the water | down to the lower lake.",
+      "sfx": [
+        {
+          "at": 0.6,
+          "type": "bubbles",
+          "gain": 0.3
+        }
+      ]
+    },
+    {
+      "text": "And the ship slowly sinks with it, like an elevator made of water.",
+      "caps": "And the ship slowly sinks with it, | like an elevator | made of water."
+    },
+    {
+      "text": "But now the gates are holding back a wall of water two stories high.",
+      "caps": "But now the gates | are holding back | a wall of water | two stories high."
+    },
+    {
+      "text": "So, the gates meet in a V that points upstream, and the water pushes them shut.",
+      "caps": "So, the gates meet in a V | that points upstream, | and the water | pushes them shut."
+    },
+    {
+      "text": "That's why they only open when the water on both sides is level.",
+      "caps": "That's why they only open | when the water | on both sides is level."
+    },
+    {
+      "text": "Filling the biggest lock here takes about twenty-two million gallons, all by gravity.",
+      "caps": "Filling the biggest lock here | takes about | 22 million gallons, | all by gravity."
+    },
+    {
+      "text": "You see, the lock never lifts the ship. Water just finds its level.",
+      "caps": "You see, the lock | never lifts the ship. | Water just | finds its level."
+    },
+    {
+      "text": "That's why ships can climb a river without a single pump.",
+      "caps": "That's why ships | can climb a river | without a single pump.",
+      "gap": 0.3
+    }
+  ]
+}
