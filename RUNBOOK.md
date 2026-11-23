@@ -69,9 +69,10 @@ Older lines marked `NOT UPLOADED` with a `pending/*.json`: same idea (their MP4 
 
 - TWO videos per day. **Owner's publish times (2026-11-22): 19:00 (7 PM) and 01:00 (1 AM) India time (Asia/Kolkata, IST)**,
   every day. (While the US is on EST: 19:00 IST = 08:30 ET, 01:00 IST = 14:30 ET the day before.)
-- Take the earliest of these IST slots that is at least **20 hours after now** and is not already taken in
-  `topics.md` (no other video within 2 hours of it; older lines are in ET: ET + 10:30 h = IST while the US is on EST,
-  + 9:30 h during US daylight time).
+- **Only ever 19:00 or 01:00 IST.** Take the FIRST of these slots that comes AFTER the newest scheduled video in
+  `topics.md` (the latest IST slot written there, including the "STUDIO BASELINE" line) and is at least 20 h after now.
+  Never fill an earlier gap: on 2026-11-23 the owner re-timed every pending video by hand in Studio, so old lines
+  (especially the ET ones) no longer show the real times.
 - Log new lines with the IST slot, e.g. `- 2026-11-27 01:00 IST · <title> · ...`.
 - meta.json `date`/`time` are exactly this IST slot (e.g. "27 Nov 2026", "01:00"); Studio's time zone is IST.
 

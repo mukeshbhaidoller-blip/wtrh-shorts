@@ -19,3 +19,4 @@ Format: `- <publish slot, New York time> · <title> · <link> · <topic> · <mai
 
 - 2026-11-24 12:00 ET · These Tires Hit the Runway at 150 MPH ✈️ · https://youtube.com/shorts/nXDqd75z3fM · jet main-gear tires: ~150 mph touchdown skid/smoke, ~200 psi dry nitrogen (14 CFR 25.733), fusible plugs melt before a burst, retreads (uploaded free via YouTube Studio browser) · 14 CFR 25.733 / FAA AC 20-97B
 - 2026-11-24 19:00 ET · Why Road Lines Glow at Night 🚗 · https://youtube.com/shorts/xoWM3B7zIRo · road lines: thermoplastic paint, glass beads retroreflect headlights, rain film hides them, raised reflectors, recessed snowplowable markers (first PC auto-upload) · TxDOT / SWARCO
+- 2026-11-27 19:00 IST · STUDIO BASELINE: on 23 Nov the owner re-timed ALL pending videos by hand in YouTube Studio to the 19:00 / 01:00 IST slots; the newest is 27 Nov 2026 19:00 IST. Times in the lines above are no longer exact. Next free slot: 28 Nov 01:00 IST.
