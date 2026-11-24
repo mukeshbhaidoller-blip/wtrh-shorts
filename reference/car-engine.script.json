@@ -1,0 +1,132 @@
+{
+ "title": "Your Engine Explodes Thousands of Times a Minute",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "lead": 0.3,
+ "outro": 0.9,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "classic",
+ "sources": [
+  "Britannica 'Four-stroke cycle' / NASA Glenn Research Center 'Four Stroke Internal Combustion Engine' (grc.nasa.gov engopt) / Haynes 'What is a four-stroke engine' / University of Windsor engine manual 'Four Stroke Cycle Engines': the four strokes are intake (fuel-air mixture drawn in), compression, power (the spark plug ignites the mixture and the burning gas drives the piston down) and exhaust; each cylinder makes one power stroke every two revolutions of the crankshaft",
+  "Britannica 'Gasoline engine: camshaft, valves, pistons' / Wikipedia 'Camshaft' / SlashGear 'Crankshaft vs. Camshaft': the connecting rod and crankshaft turn the piston's up-and-down motion into rotation; the camshaft, driven by the crankshaft at half its speed, opens and closes the intake and exhaust valves at the right moments",
+  "HowStuffWorks 'What Is an Internal Combustion Engine?' / Capital One 'Car Engines Explained: Cylinders, Layouts' / Explain That Stuff 'Car engines': most car engines have four or more cylinders whose power strokes are spread out (firing order) so the engine runs smoothly; the fuel burns inside the engine itself, hence 'internal combustion'",
+  "Arithmetic from the four-stroke facts above: a four-cylinder engine at 3,000 rpm makes 4 x 3,000 / 2 = 6,000 power strokes a minute = 100 per second; at 2,000 rpm it is 4,000 a minute (thousands a minute)"
+ ],
+ "lines": [
+  {
+   "text": "Your car's engine sets off thousands of explosions a minute, on purpose.",
+   "caps": "Your car's engine | sets off thousands | of explosions a minute, | on purpose.",
+   "sfx": [
+    {
+     "at": 0.9,
+     "type": "thud",
+     "gain": 0.3
+    },
+    {
+     "at": 2.23,
+     "type": "thud",
+     "gain": 0.25
+    },
+    {
+     "at": 3.57,
+     "type": "thud",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "If you light gasoline in the open, you just get a fire.",
+   "caps": "If you light gasoline | in the open, | you just get a fire.",
+   "sfx": [
+    {
+     "at": 0.8,
+     "type": "sizzle",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "So, you trap a puff of fuel and air inside a steel tube, called a cylinder.",
+   "caps": "So, you trap a puff | of fuel and air | inside a steel tube, | called a cylinder."
+  },
+  {
+   "text": "A spark plug lights it, and the blast shoves a piston down.",
+   "caps": "A spark plug lights it, | and the blast | shoves a piston down.",
+   "sfx": [
+    {
+     "at": 0.9,
+     "type": "thud",
+     "gain": 0.4
+    }
+   ]
+  },
+  {
+   "text": "But a piston only goes up and down, and wheels need to spin.",
+   "caps": "But a piston only | goes up and down, | and wheels need to spin."
+  },
+  {
+   "text": "So, a rod links it to a crankshaft, like your legs on bike pedals.",
+   "caps": "So, a rod links it | to a crankshaft, | like your legs | on bike pedals."
+  },
+  {
+   "text": "But after one bang, the cylinder is full of burnt gas.",
+   "caps": "But after one bang, | the cylinder is full | of burnt gas."
+  },
+  {
+   "text": "So, it works in four strokes: suck in, squeeze, bang, blow out.",
+   "caps": "So, it works | in four strokes: | suck in, squeeze, | bang, blow out.",
+   "sfx": [
+    {
+     "at": 2.7,
+     "type": "thud",
+     "gain": 0.35
+    }
+   ]
+  },
+  {
+   "text": "Valves open and close right on time, pushed by a spinning camshaft.",
+   "caps": "Valves open and close | right on time, | pushed by a spinning camshaft.",
+   "sfx": [
+    {
+     "at": 0.6,
+     "type": "tock",
+     "gain": 0.25
+    },
+    {
+     "at": 1.4,
+     "type": "tock",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "But one cylinder only fires every second turn, so it shakes.",
+   "caps": "But one cylinder only fires | every second turn, | so it shakes."
+  },
+  {
+   "text": "So, most cars use four or more cylinders, taking turns.",
+   "caps": "So, most cars use | four or more cylinders, | taking turns."
+  },
+  {
+   "text": "At three thousand R P M, a four-cylinder fires a hundred times a second.",
+   "caps": "At 3,000 RPM, | a four-cylinder fires | 100 times a second.",
+   "sfx": [
+    {
+     "at": 0.3,
+     "type": "whoosh",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "You see, it's tiny explosions, perfectly timed and turned into spin.",
+   "caps": "You see, it's tiny explosions, | perfectly timed | and turned into spin."
+  },
+  {
+   "text": "That's why it's called internal combustion: the fire happens inside.",
+   "caps": "That's why it's called | internal combustion: | the fire happens inside.",
+   "gap": 0.3
+  }
+ ]
+}
