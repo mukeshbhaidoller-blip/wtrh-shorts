@@ -1,0 +1,85 @@
+{
+ "title": "This Machine Builds the Tunnel It Digs",
+ "voice": "am_michael",
+ "speed": 1.1,
+ "lead": 0.3,
+ "outro": 0.9,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "classic",
+ "sources": [
+  "Herrenknecht 'Double Shield TBM' / 'EPB Shield' product pages / Wikipedia 'Tunnel boring machine' / Darda 'Tunnel Boring Machine - Types, Operation & Uses' / Trenchlesspedia 'How Tunnel Boring Machines Work': a tunnel boring machine (TBM) excavates with a rotating cutterhead at the front; disc cutters roll over the rock face under high thrust and fracture it into chips; a cylindrical steel shield behind the cutterhead supports the ground until the lining is in place",
+  "Colorado School of Mines 'Segmental Concrete Lining Design and Installation' seminar / Herrenknecht 'Segment production systems' / Wikipedia 'Tunnel boring machine': precast concrete segments are placed by a segment erector inside the shield tail and bolted into complete rings, ring after ring, to form the permanent tunnel lining",
+  "City Rail Link (Auckland) 'Our TBM Explained' / emetro.gr 'Hard Rock Shield TBM' / Wikipedia 'Tunnelling shield': hydraulic thrust cylinders (jacks) push against the last installed ring of segments to drive the shield and cutterhead forward",
+  "Wikipedia 'Tunnel boring machine' / Trenchlesspedia: excavated material (muck) is carried out of the tunnel by conveyor belt (soft-ground EPB machines use a screw conveyor first, then a belt)",
+  "Wikipedia 'Bertha (tunnel boring machine)' / SDOT Blog 'What's Happening, Bertha!' / KNKX 'Bertha, World's Largest Boring Machine, Ready to Dig' / ENR 'Here Comes Bertha: The World's Largest-Diameter Tunneling Machine' / NPR 'Sand Grinds World's Largest Tunneling Machine To A Halt': Bertha, which dug Seattle's SR 99 tunnel, had a cutterhead 57.5 feet in diameter, about five stories tall"
+ ],
+ "lines": [
+  {
+   "text": "If you dig a hole sideways under a city, the ground tries to fall back in.",
+   "caps": "If you dig a hole | sideways under a city, | the ground tries | to fall back in."
+  },
+  {
+   "text": "Loose dirt and cracked rock can cave in as fast as you dig.",
+   "caps": "Loose dirt and cracked rock | can cave in | as fast as you dig.",
+   "sfx": [{"at": 1.0, "type": "thud", "gain": 0.35}]
+  },
+  {
+   "text": "So, engineers send in a machine that digs and builds the tunnel at the same time.",
+   "caps": "So, engineers send in | a machine that digs | and builds the tunnel | at the same time."
+  },
+  {
+   "text": "At the front, a giant round cutterhead slowly spins against the earth.",
+   "caps": "At the front, | a giant round cutterhead | slowly spins | against the earth."
+  },
+  {
+   "text": "Steel disc cutters roll across the rock and crack it into chips.",
+   "caps": "Steel disc cutters | roll across the rock | and crack it into chips.",
+   "sfx": [{"at": 1.6, "type": "tock", "gain": 0.3}]
+  },
+  {
+   "text": "But even a perfectly round hole can still collapse.",
+   "caps": "But even a perfectly | round hole | can still collapse."
+  },
+  {
+   "text": "So, a steel shield right behind the cutterhead holds the ground back.",
+   "caps": "So, a steel shield | right behind the cutterhead | holds the ground back.",
+   "sfx": [{"at": 0.5, "type": "slam", "gain": 0.3}]
+  },
+  {
+   "text": "Inside it, a robotic arm lifts curved concrete pieces called segments.",
+   "caps": "Inside it, a robotic arm | lifts curved concrete pieces | called segments."
+  },
+  {
+   "text": "It fits them into a full ring, then the next ring, and the next.",
+   "caps": "It fits them | into a full ring, | then the next ring, | and the next.",
+   "sfx": [{"at": 1.2, "type": "thud", "gain": 0.3}, {"at": 2.4, "type": "thud", "gain": 0.3}]
+  },
+  {
+   "text": "But how does a machine this heavy move forward with nothing to push on?",
+   "caps": "But how does a machine | this heavy move forward | with nothing to push on?"
+  },
+  {
+   "text": "Hydraulic jacks push against the ring it just built, and shove the whole machine ahead.",
+   "caps": "Hydraulic jacks push | against the ring it just built, | and shove the whole | machine ahead.",
+   "sfx": [{"at": 1.4, "type": "slide", "gain": 0.3}]
+  },
+  {
+   "text": "Meanwhile, a conveyor belt carries the dirt out behind it.",
+   "caps": "Meanwhile, a conveyor belt | carries the dirt | out behind it."
+  },
+  {
+   "text": "One machine under Seattle was fifty-seven feet across, about five stories tall.",
+   "caps": "One machine under Seattle | was 57 feet across, | about five stories tall."
+  },
+  {
+   "text": "You see, it's always pushing off the very tunnel it's building.",
+   "caps": "You see, it's always | pushing off the very tunnel | it's building."
+  },
+  {
+   "text": "That's why the inside of a subway tunnel looks like a stack of concrete rings.",
+   "caps": "That's why the inside | of a subway tunnel | looks like a stack | of concrete rings.",
+   "gap": 0.3
+  }
+ ]
+}
