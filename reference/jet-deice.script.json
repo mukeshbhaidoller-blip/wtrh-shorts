@@ -1,0 +1,112 @@
+{
+ "title": "Why Planes Get a Bath Before Winter Flights",
+ "voice": "am_michael",
+ "speed": 1.1,
+ "lead": 0.3,
+ "outro": 0.9,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "classic",
+ "sources": [
+  "FAA AC 120-60 'Ground Deicing and Anti-icing Program' / FAA AC 20-117 'Hazards Following Ground Deicing and Ground Operations in Conditions Conducive to Aircraft Icing' / NASA Glenn 'A Pilot's Guide to Ground Icing' / AOPA 'Icing' safety spotlight: frost, ice or snow with the thickness and roughness of medium or coarse sandpaper on a wing's leading edge and upper surface can reduce lift by as much as 30 percent and increase drag by about 40 percent",
+  "14 CFR 121.629 (eCFR) / 14 CFR 135.227 / FAA AC 120-60 'clean aircraft concept': no person may take off when frost, ice or snow is adhering to the wings, control surfaces or propellers",
+  "FAA 'Holdover Time Guidelines' (2025-26 / 2026-27 tables, General Information) / Wikipedia 'Aircraft deicing fluid' / Transport Canada TP 10643 'Deicing/Anti-icing Fluids': Type I fluid is a glycol-and-water mix, low-viscosity, usually dyed orange and applied heated to remove frost, ice and snow; it gives only short protection (minutes) in falling snow",
+  "FAA Holdover Time Guidelines / NASA Glenn 'A Pilot's Guide to Ground Icing' / Wikipedia 'Aircraft deicing fluid': Type IV anti-icing fluid is thickened (gel-like), dyed green, applied cold after deicing, keeps new snow and ice from sticking for a holdover time (the estimated time the protection lasts), and is designed to shear off the wing during the takeoff roll",
+  "Aviation Pros 'Deicing and Anti-Icing Equipment' / Des Moines Register 'Behind the scenes of de-icing planes at the Des Moines International Airport': de-icing trucks with a boom and an operator's bucket spray the aircraft, often on a dedicated de-icing pad",
+  "NASA Glenn 'A Pilot's Guide to Ground Icing': surface roughness disturbs the smooth airflow over the wing's upper surface, lowering lift and the stall angle"
+ ],
+ "lines": [
+  {
+   "text": "If you leave a jet out on a cold night, its wings can forget how to fly.",
+   "caps": "If you leave a jet out | on a cold night, | its wings can forget | how to fly."
+  },
+  {
+   "text": "By morning, a thin coat of frost covers them, as rough as sandpaper.",
+   "caps": "By morning, a thin coat | of frost covers them, | as rough as sandpaper.",
+   "sfx": [
+    {
+     "at": 0.6,
+     "type": "sparkle",
+     "gain": 0.25
+    }
+   ]
+  },
+  {
+   "text": "But that roughness can steal up to thirty percent of the lift.",
+   "caps": "But that roughness | can steal up to 30% | of the lift."
+  },
+  {
+   "text": "So, the rule is simple: no takeoff with frost, ice, or snow stuck to the wings.",
+   "caps": "So, the rule is simple: | no takeoff with frost, | ice, or snow | stuck to the wings."
+  },
+  {
+   "text": "Before departure, the jet rolls onto a de-icing pad.",
+   "caps": "Before departure, | the jet rolls | onto a de-icing pad."
+  },
+  {
+   "text": "A worker in a bucket on a truck's boom sprays it with hot, orange fluid.",
+   "caps": "A worker in a bucket | on a truck's boom | sprays it with | hot, orange fluid.",
+   "sfx": [
+    {
+     "at": 2.2,
+     "type": "sizzle",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "It's mostly glycol and water, and it melts the frost right off.",
+   "caps": "It's mostly glycol and water, | and it melts the frost | right off."
+  },
+  {
+   "text": "But if snow keeps falling, the wing can ice up again within minutes.",
+   "caps": "But if snow keeps falling, | the wing can ice up again | within minutes."
+  },
+  {
+   "text": "So, a second coat goes on: a thick, green gel that keeps new snow from sticking.",
+   "caps": "So, a second coat goes on: | a thick, green gel | that keeps new snow | from sticking.",
+   "sfx": [
+    {
+     "at": 1.2,
+     "type": "plop",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "Pilots get a time limit, called holdover time, to take off.",
+   "caps": "Pilots get a time limit, | called holdover time, | to take off.",
+   "sfx": [
+    {
+     "at": 0.5,
+     "type": "tock",
+     "gain": 0.3
+    }
+   ]
+  },
+  {
+   "text": "But wouldn't goo on the wing ruin the flight, too?",
+   "caps": "But wouldn't goo | on the wing | ruin the flight, too?"
+  },
+  {
+   "text": "No. As the jet races down the runway, the wind shears the gel right off.",
+   "caps": "No. As the jet races | down the runway, | the wind shears | the gel right off.",
+   "sfx": [
+    {
+     "at": 1.0,
+     "type": "whoosh",
+     "gain": 0.4
+    }
+   ]
+  },
+  {
+   "text": "You see, a wing only lifts when air flows smoothly over its curved top.",
+   "caps": "You see, a wing only lifts | when air flows smoothly | over its curved top."
+  },
+  {
+   "text": "That's why, on a winter morning, your plane gets a bath before it flies.",
+   "caps": "That's why, on a winter morning, | your plane gets a bath | before it flies.",
+   "gap": 0.3
+  }
+ ]
+}
