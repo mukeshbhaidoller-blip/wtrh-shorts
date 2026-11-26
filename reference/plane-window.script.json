@@ -1,0 +1,32 @@
+{
+ "title": "That Tiny Hole in Your Plane Window Is On Purpose",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "lead": 0.3,
+ "outro": 0.9,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "classic",
+ "sources": [
+  "Mental Floss 'Why Airplane Windows Have Tiny Holes' / Fox News Travel 'Why do airplane windows have tiny holes?' / Gizmodo 'Why is there a hole in airplane windows' / AFAR 'Why Is There a Tiny Hole in the Airplane Window?' / Fortune (2015) 'airplane window holes' / GlobalAir 'Why do airplane windows have tiny holes': a passenger window has three panes (outer, middle, inner); the small breather (bleed) hole is in the middle pane, it balances the pressure between the cabin and the air gap so the outer pane carries the pressure load and the middle pane is a fail-safe backup if the outer pane fails; it also lets moisture out so the window stays clear of fog and frost",
+  "The Points Guy 'What are airplane windows made of' / AeroCorner 'What Are Airplane Windows Made of?' / Plastics Engineering (SPE) 'Inside the technology of aircraft windows': airliner cabin windows are made of stretched acrylic, not glass; the thin innermost pane is a non-structural scratch pane that protects the structural panes from passengers",
+  "14 CFR 25.841 (Cornell LII / govinfo) 'Pressurized cabins': cabin pressure altitude of not more than 8,000 feet at the airplane's maximum operating altitude / AeroSavvy 'Aircraft Pressurization Beginner's Guide' / 6Pistons 'Cabin Pressurisation: Helping us breathe at 35,000 feet': air at cruise height (~35,000 ft) is too thin to breathe, so the cabin is pumped up with air from the engines; the inside-outside pressure difference is roughly 8 psi at cruise",
+  "HowStuffWorks 'Why Are Airplane Windows Round?' / TIME 'Why Are Airplane Windows Round' / Mental Floss 'Why are airplane windows round' / AFAR 'There's a Very Good Reason Airplanes Have Rounded Windows': sharp square corners concentrate stress from the repeated pressurization cycles and fatigue cracks start there; rounded windows spread the stress evenly"
+ ],
+ "lines": [
+  {"text": "There's a tiny hole in your airplane window, and it's there on purpose.", "caps": "There's a tiny hole | in your airplane window, | and it's there on purpose."},
+  {"text": "At thirty-five thousand feet, the air outside is too thin to breathe.", "caps": "At 35,000 feet, | the air outside | is too thin to breathe."},
+  {"text": "So, the cabin is pumped full of air, like a balloon.", "caps": "So, the cabin is pumped | full of air, | like a balloon.", "sfx": [{"at": 0.5, "type": "whoosh", "gain": 0.25}]},
+  {"text": "But that air pushes out on every window, about eight pounds on each square inch.", "caps": "But that air pushes out | on every window, | about 8 pounds | on each square inch."},
+  {"text": "So, a window isn't one sheet of glass. It's three panes of tough acrylic.", "caps": "So, a window isn't | one sheet of glass. | It's three panes | of tough acrylic.", "sfx": [{"at": 2.0, "type": "slide", "gain": 0.3}]},
+  {"text": "The thick outer pane holds back the pressure.", "caps": "The thick outer pane | holds back the pressure."},
+  {"text": "The middle one is a spare, in case the outer pane ever cracks.", "caps": "The middle one is a spare, | in case the outer pane | ever cracks."},
+  {"text": "And the thin inner pane just keeps your fingers off.", "caps": "And the thin inner pane | just keeps | your fingers off.", "sfx": [{"at": 1.6, "type": "tock", "gain": 0.3}]},
+  {"text": "That tiny hole is in the middle pane, so cabin air slips through it.", "caps": "That tiny hole | is in the middle pane, | so cabin air | slips through it."},
+  {"text": "The pressure on both sides stays equal, so only the outer pane takes the load.", "caps": "The pressure on both sides | stays equal, | so only the outer pane | takes the load."},
+  {"text": "The hole also lets moisture out, so the panes don't fog or frost over.", "caps": "The hole also | lets moisture out, | so the panes don't | fog or frost over.", "sfx": [{"at": 1.4, "type": "sparkle", "gain": 0.25}]},
+  {"text": "And the windows are round, because sharp corners pile up stress, and cracks start there.", "caps": "And the windows are round, | because sharp corners | pile up stress, | and cracks start there."},
+  {"text": "You see, the cabin is a metal balloon, filled and emptied every flight.", "caps": "You see, the cabin | is a metal balloon, | filled and emptied | every flight."},
+  {"text": "That's why airplane windows are small, round, and have one tiny hole.", "caps": "That's why airplane windows | are small, round, | and have one tiny hole."}
+ ]
+}
