@@ -1,0 +1,31 @@
+{
+ "title": "Why Escalator Stairs Vanish Into the Floor",
+ "voice": "am_michael",
+ "speed": 1.15,
+ "lead": 0.3,
+ "outro": 0.9,
+ "gap": 0.16,
+ "music": "bed",
+ "style": "classic",
+ "sources": [
+  "HowStuffWorks 'How Escalators Work' (science.howstuffworks.com/transport/engines-equipment/escalator.htm, 'Steppin' Out') / Wonderopolis 'How Do Escalators Work?' / Designing Buildings Wiki 'Escalator components' / Encyclopedia.com 'Escalator': each step has two pairs of wheels; the front wheels ride on one track (pulled by the drive chain), the rear wheels on a second track; the tracks' spacing keeps each step level; on the incline the tracks are offset so the steps form stairs; near the top and bottom the two tracks level off so the steps flatten into a platform; the steps loop around a drive gear and return upside down underneath; steps have cleats/grooves that mesh with the comb plate's teeth at the landings",
+  "HowStuffWorks 'How Escalators Work' / Designing Buildings Wiki 'Escalator components' / US patent class 198/331 'means synchronizing the operation of the steps and a handrail': the handrail is a rubber (conveyor-belt-like) loop driven from the same main drive as the steps so it moves at the same speed",
+  "Wikipedia 'Wheaton station (Washington Metro)' / MyMCMedia 'Wheaton Metro Station Boasts Longest Escalator in the Western Hemisphere' / WTOP (2025) 'The longest Metro escalator' / WorldAtlas 'The longest escalator in America': Wheaton station (Maryland, Washington Metro) has escalators 230 feet long, the longest in the Western Hemisphere"
+ ],
+ "lines": [
+  {"text": "If you make a staircase move, the steps smash into the floor at the top.", "caps": "If you make a | staircase move, | the steps smash | into the floor at the top."},
+  {"text": "So, every escalator step is really a little cart with four wheels.", "caps": "So, every escalator step | is really a little cart | with four wheels.", "sfx": [{"at": 0.4, "type": "whoosh", "gain": 0.25}]},
+  {"text": "The front wheels and the back wheels ride on two different tracks.", "caps": "The front wheels | and the back wheels | ride on two different tracks."},
+  {"text": "Those tracks keep every step level, even while the chain climbs.", "caps": "Those tracks keep | every step level, | even while the chain climbs."},
+  {"text": "On the slope, each step sits a bit higher than the last one, so you get stairs.", "caps": "On the slope, | each step sits a bit higher | than the last one, | so you get stairs."},
+  {"text": "Near the top, both tracks flatten out, and the stairs fold into a flat floor.", "caps": "Near the top, | both tracks flatten out, | and the stairs fold | into a flat floor.", "sfx": [{"at": 2.4, "type": "slide", "gain": 0.3}]},
+  {"text": "But the end of a moving floor could still pinch a shoe.", "caps": "But the end | of a moving floor | could still pinch a shoe."},
+  {"text": "So, the steps have deep grooves, and a comb's teeth slide right into them.", "caps": "So, the steps have | deep grooves, | and a comb's teeth | slide right into them."},
+  {"text": "Then each step flips upside down and rides back underneath, in one endless loop.", "caps": "Then each step | flips upside down | and rides back underneath, | in one endless loop.", "sfx": [{"at": 1.0, "type": "whoosh", "gain": 0.25}]},
+  {"text": "But your hand is on the handrail, so it can't fall behind the steps.", "caps": "But your hand | is on the handrail, | so it can't fall | behind the steps."},
+  {"text": "So, the handrail is a rubber loop, driven by the same machine, at the same speed.", "caps": "So, the handrail | is a rubber loop, | driven by the same machine, | at the same speed."},
+  {"text": "The longest ones in America, at Wheaton station near Washington, are two hundred thirty feet long.", "caps": "The longest ones in America, | at Wheaton station | near Washington, | are 230 feet long."},
+  {"text": "You see, an escalator is just a chain of little carts, going round and round.", "caps": "You see, an escalator | is just a chain | of little carts, | going round and round."},
+  {"text": "That's why the stairs vanish into the floor at the top.", "caps": "That's why the stairs | vanish into the floor | at the top."}
+ ]
+}
